@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Futé 2.0 — The Real Estate Buyer Experience Company</title>
+  <meta name="description" content="One vision. Every experience. Aligned. Futuristic Unique Trendy Exceptional Real Estate Buyer Experience Profile.">
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --fute-red: #c8162c;
+      --fute-red-hover: #e01933;
+      --fute-dark: #141412;
+      --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --ease-lux: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-smooth: cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: #ffffff;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      background-color: #ffffff;
+      /* Liquid smooth background color transition */
+      transition: background-color 1.2s var(--ease-lux);
+      font-family: var(--font-main);
+      overflow-x: hidden;
+    }
+
+    /* Scroll Container */
+    .slide-section {
+      width: 100%;
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 3vw 2vw;
+      transition: background-color 1.2s var(--ease-lux);
+      overflow: hidden;
+    }
+
+    /* Slide Frame with Subtle Parallax Perspective */
+    .slide-frame {
+      position: relative;
+      max-width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      perspective: 1000px;
+    }
+
+    /* Silky Smooth Reveal Animation */
+    .slide-img {
+      display: block;
+      margin: 0 auto;
+      width: min(100vw, calc(100vh * 16 / 9));
+      width: min(100vw, calc(100dvh * 16 / 9));
+      height: auto;
+      max-width: 100%;
+      object-fit: contain;
+
+      /* Gentle, silky entrance transition */
+      opacity: 0.05;
+      transform: translate3d(0, 50px, 0) scale(0.965);
+      transition: opacity 1.4s var(--ease-lux), 
+                  transform 1.6s var(--ease-lux),
+                  filter 1.4s var(--ease-lux);
+      filter: blur(8px);
+      will-change: opacity, transform, filter;
+      border-radius: 4px;
+    }
+
+    /* Active Visible Slide State — Silky Sharp & Elevated */
+    .slide-section.is-visible .slide-img {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) scale(1);
+      filter: blur(0px);
+    }
+
+    /* Subtle Continuous Hover Lift */
+    .slide-frame:hover .slide-img {
+      transform: translate3d(0, -4px, 0) scale(1.01);
+      transition: transform 0.6s var(--ease-lux);
+    }
+
+    /* Floating Contact Us Button with Pulsing Ambient Glow */
+    .btn-contact-floating {
+      position: fixed;
+      bottom: 36px;
+      right: 36px;
+      z-index: 999;
+      background: rgba(200, 22, 44, 0.94);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      padding: 13px 26px;
+      border-radius: 50px;
+      font-family: var(--font-main);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 10px 32px rgba(200, 22, 44, 0.4), 0 2px 10px rgba(0, 0, 0, 0.2);
+
+      /* Micro-Interactions */
+      transition: transform 0.4s var(--ease-lux),
+                  background-color 0.3s ease,
+                  box-shadow 0.4s var(--ease-lux);
+      will-change: transform;
+      animation: pulseGlow 3.5s infinite ease-in-out;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% {
+        box-shadow: 0 10px 32px rgba(200, 22, 44, 0.4), 0 2px 10px rgba(0, 0, 0, 0.2);
+      }
+      50% {
+        box-shadow: 0 14px 44px rgba(200, 22, 44, 0.65), 0 4px 14px rgba(0, 0, 0, 0.3);
+      }
+    }
+
+    .btn-contact-floating:hover {
+      background: var(--fute-red-hover);
+      transform: translate3d(0, -5px, 0) scale(1.05);
+      animation: none;
+      box-shadow: 0 16px 48px rgba(200, 22, 44, 0.6), 0 4px 14px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn-contact-floating:active {
+      transform: translate3d(0, -1px, 0) scale(0.97);
+    }
+
+    .btn-contact-icon {
+      width: 16px;
+      height: 16px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      transition: transform 0.4s var(--ease-lux);
+    }
+
+    .btn-contact-floating:hover .btn-contact-icon {
+      transform: scale(1.2) rotate(-8deg);
+    }
+
+    /* Contact Overlay Modal */
+    .contact-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(14, 14, 12, 0.85);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s var(--ease-lux);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .contact-overlay.is-active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .contact-card {
+      background: #1c1c1a;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 20px;
+      width: min(520px, 92vw);
+      padding: 40px 34px;
+      color: #ffffff;
+      position: relative;
+      transform: translate3d(0, 35px, 0) scale(0.94);
+      transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+    }
+
+    .contact-overlay.is-active .contact-card {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+
+    .btn-close-modal {
+      position: absolute;
+      top: 22px;
+      right: 22px;
+      background: rgba(255, 255, 255, 0.08);
+      border: none;
+      color: #ffffff;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 16px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-close-modal:hover {
+      background: var(--fute-red);
+      transform: scale(1.1) rotate(90deg);
+    }
+
+    .contact-brand {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      color: var(--fute-red);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .contact-title {
+      font-size: 26px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 6px;
+    }
+
+    .contact-subtitle {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.6);
+      margin-bottom: 24px;
+    }
+
+    .contact-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .contact-tile {
+      display: flex;
+      flex-direction: column;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 16px 20px;
+      border-radius: 12px;
+      text-decoration: none;
+      color: #ffffff;
+      transition: all 0.35s var(--ease-lux);
+    }
+
+    .contact-tile:hover {
+      background: rgba(200, 22, 44, 0.18);
+      border-color: var(--fute-red);
+      transform: translate3d(6px, 0, 0);
+    }
+
+    .contact-name {
+      font-weight: 600;
+      font-size: 15px;
+      color: #ffffff;
+    }
+
+    .contact-detail {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.7);
+      margin-top: 4px;
+    }
+
+    .contact-footer {
+      margin-top: 24px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.45);
+      text-align: center;
+      letter-spacing: 1.2px;
+    }
+
+    /* Accessibility: Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      body, .slide-section, .slide-img, .btn-contact-floating, .contact-overlay, .contact-card {
+        transition: none !important;
+        transform: none !important;
+        opacity: 1 !important;
+        filter: none !important;
+        animation: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Slide Sections Container -->
+  <main id="app">
+    <!-- Generated dynamically via JS with exact color themes -->
+  </main>
+
+  <!-- Premium Floating Contact Us Button -->
+  <button class="btn-contact-floating" id="openContactBtn" aria-label="Contact Us">
+    <svg class="btn-contact-icon" viewBox="0 0 24 24">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+    </svg>
+    <span>Contact Us</span>
+  </button>
+
+  <!-- Premium Contact Modal -->
+  <div class="contact-overlay" id="contactOverlay" aria-hidden="true">
+    <div class="contact-card">
+      <button class="btn-close-modal" id="closeContactBtn" aria-label="Close modal">✕</button>
+      <div class="contact-brand">Futé Services<sup>®</sup></div>
+      <h2 class="contact-title">Get in Touch</h2>
+      <p class="contact-subtitle">The Real Estate Buyer Experience Company — India | Singapore | UAE | Australia</p>
+
+      <div class="contact-grid">
+        <a href="mailto:Soma@futeservices.com" class="contact-tile">
+          <div class="contact-name">Soma</div>
+          <div class="contact-detail">Soma@futeservices.com</div>
+        </a>
+
+        <a href="mailto:Payel@futeservices.com" class="contact-tile">
+          <div class="contact-name">Payel — India & International</div>
+          <div class="contact-detail">Payel@futeservices.com | +91 97422 23928</div>
+          <div class="contact-detail">India Alternate: +91 87928 08870</div>
+          <div class="contact-detail">Australia: +61 493 165 725</div>
+        </a>
+
+        <a href="mailto:amelia@futeservices.com" class="contact-tile">
+          <div class="contact-name">Amelia</div>
+          <div class="contact-detail">amelia@futeservices.com</div>
+        </a>
+      </div>
+
+      <div class="contact-footer">
+        INDIA &bull; AUSTRALIA &bull; DUBAI &bull; FUTESERVICES.COM
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const SLIDES = [
+      { id: 1, img: 'slides/s-01.jpg', bg: '#ffffff' },
+      { id: 2, img: 'slides/s-02.jpg', bg: '#141412' },
+      { id: 3, img: 'slides/s-03.jpg', bg: '#f3f0e9' },
+      { id: 4, img: 'slides/s-04.jpg', bg: '#141412' },
+      { id: 5, img: 'slides/s-05.jpg', bg: '#f3f0e9' },
+      { id: 6, img: 'slides/s-06.jpg', bg: '#131311' },
+      { id: 7, img: 'slides/s-07.jpg', bg: '#141412' },
+      { id: 8, img: 'slides/s-08.jpg', bg: '#fbf6f0' },
+      { id: 9, img: 'slides/s-09.jpg', bg: '#0e0e0c' },
+      { id: 10, img: 'slides/s-10.jpg', bg: '#97c5e6' },
+      { id: 11, img: 'slides/s-11.jpg', bg: '#12150a' },
+      { id: 12, img: 'slides/s-12.jpg', bg: '#c7dbe6' },
+      { id: 13, img: 'slides/s-13.jpg', bg: '#456c95' },
+      { id: 14, img: 'slides/s-14.jpg', bg: '#362f27' },
+      { id: 15, img: 'slides/s-15.jpg', bg: '#ffe9d1' },
+      { id: 16, img: 'slides/s-16.jpg', bg: '#86483d' },
+      { id: 17, img: 'slides/s-17.jpg', bg: '#a8977d' },
+      { id: 18, img: 'slides/s-18.jpg', bg: '#181715' },
+      { id: 19, img: 'slides/s-19.jpg', bg: '#f3f0e9' },
+      { id: 20, img: 'slides/s-20.jpg', bg: '#141412' },
+      { id: 21, img: 'slides/s-21.jpg', bg: '#141412' },
+      { id: 22, img: 'slides/s-22.jpg', bg: '#f3f0e9' },
+      { id: 23, img: 'slides/s-23.jpg', bg: '#141412' },
+      { id: 24, img: 'slides/s-24.jpg', bg: '#f3f0e9' },
+      { id: 25, img: 'slides/s-25.jpg', bg: '#141412' },
+      { id: 26, img: 'slides/s-26.jpg', bg: '#141412' },
+      { id: 27, img: 'slides/s-27.jpg', bg: '#141412' },
+      { id: 28, img: 'slides/s-28.jpg', bg: '#141412' },
+      { id: 29, img: 'slides/s-29.jpg', bg: '#c8162c' },
+      { id: 30, img: 'slides/s-30.jpg', bg: '#141412' },
+      { id: 31, img: 'slides/s-31.jpg', bg: '#f3f0e9' },
+      { id: 32, img: 'slides/s-32.jpg', bg: '#bc1728' }
+    ];
+
+    const app = document.getElementById('app');
+
+    // Build slide sections with exact colors
+    SLIDES.forEach((slide, index) => {
+      const section = document.createElement('section');
+      section.className = 'slide-section';
+      section.style.backgroundColor = slide.bg;
+      section.dataset.bg = slide.bg;
+
+      const frame = document.createElement('div');
+      frame.className = 'slide-frame';
+
+      const img = document.createElement('img');
+      img.src = slide.img;
+      img.alt = `Futé 2.0 Slide ${slide.id}`;
+      img.className = 'slide-img';
+      img.loading = index < 2 ? 'eager' : 'lazy';
+
+      frame.appendChild(img);
+      section.appendChild(frame);
+      app.appendChild(section);
+    });
+
+    // Silky Smooth Intersection Observer
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          document.body.style.backgroundColor = entry.target.dataset.bg;
+          entry.target.classList.add('is-visible');
+        }
+      });
+    }, { 
+      threshold: 0.25,
+      rootMargin: '-50px 0px -50px 0px' 
+    });
+
+    document.querySelectorAll('.slide-section').forEach(sec => observer.observe(sec));
+
+    // Modal Micro-Interactions
+    const overlay = document.getElementById('contactOverlay');
+    const openBtn = document.getElementById('openContactBtn');
+    const closeBtn = document.getElementById('closeContactBtn');
+
+    function openModal() {
+      overlay.classList.add('is-active');
+      overlay.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeModal() {
+      overlay.classList.remove('is-active');
+      overlay.setAttribute('aria-hidden', 'true');
+    }
+
+    openBtn.addEventListener('click', openModal);
+    closeBtn.addEventListener('click', closeModal);
+
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) closeModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+  </script>
+</body>
+</html>
