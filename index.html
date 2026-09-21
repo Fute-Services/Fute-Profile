@@ -317,7 +317,7 @@
     .slide-canvas {
       position: relative;
       width: 100%;
-      min-height: 100svh;
+      min-height: 0;
       padding: 72px 24px 88px;
       display: flex;
       flex-direction: column;
@@ -382,98 +382,6 @@
     .s25-step h3 { font-size: 13px; font-weight: 700; letter-spacing: 0.06em; color: var(--sc-red); text-transform: uppercase; line-height: 32px; }
     .s25-step p { margin-top: 6px; font-size: 15px; line-height: 1.5; }
 
-    /* ---------- Desktop / tablet landscape: exact 16:9 canvas ---------- */
-    @media (min-width: 768px) {
-      .slide-canvas {
-        width: min(100%, calc((100dvh - 6vw) * 16 / 9));
-        min-height: 0;
-        margin: 0 auto;
-        padding: 0;
-        display: block;
-        aspect-ratio: 16 / 9;
-        container-type: inline-size;
-        border-radius: 4px;
-        filter: blur(8px);
-        transform: translate3d(0, 50px, 0) scale(0.965);
-        transition: opacity 1.4s var(--ease-lux), transform 1.6s var(--ease-lux), filter 1.4s var(--ease-lux);
-      }
-      .slide-section.is-visible .slide-canvas { filter: none; transform: none; }
-      .slide-html.slide-section { padding: 3vw 2vw; align-items: center; min-height: 100vh; min-height: 100dvh; }
-      .slide-html .slide-frame { align-items: center; }
-
-      .sc-eyebrow, .sc-h1, .sc-lead, .sc-tag { position: absolute; }
-      .sc-eyebrow { left: 6.25cqw; top: 3.4cqw; font-size: 0.83cqw; }
-      .sc-h1 { left: 6.25cqw; font-size: 7.6cqw; line-height: 0.96; white-space: nowrap; overflow-wrap: normal; }
-      .sc-lead { left: 6.25cqw; font-size: 1.4cqw; line-height: 1.35; width: 42cqw; }
-      .sc-tag { left: 6.25cqw; font-size: 0.83cqw; }
-      .sc-foot {
-        position: absolute; left: var(--pl, 6.25cqw); right: var(--pr, 3cqw); bottom: 2.1cqw;
-        margin: 0; padding: 0; font-size: 0.83cqw;
-      }
-
-      /* Slide 8 */
-      .s8 { --pl: 5cqw; --pr: 5cqw; }
-      .s8-grid {
-        position: absolute; left: 5cqw; top: 9.5cqw;
-        grid-template-columns: 34.4cqw 34.4cqw; column-gap: 12.7cqw;
-      }
-      .s8-item { height: 17.6cqw; padding: 0; border-top: 0; }
-      .s8-item:nth-child(n+3) { border-top: 1px solid rgba(20, 20, 18, 0.16); }
-      .s8-item:nth-child(n+3) .s8-title { margin-top: 0.4cqw; }
-      .s8-item:last-child, .s8-item:nth-last-child(2) { border-bottom: 1px solid rgba(20, 20, 18, 0.16); }
-      .s8-title { font-size: 3.2cqw; line-height: 1.1; margin-top: 0.4cqw; }
-      .s8-time { margin-top: 3.4cqw; font-size: 0.85cqw; }
-      .s8-desc { margin-top: 1.1cqw; font-size: 1.4cqw; line-height: 1.4; max-width: 34cqw; }
-      .s8 .sc-tag { left: 5cqw; top: 49.1cqw; }
-
-      /* Slide 19 */
-      .s19 .sc-h1 { top: 8.5cqw; font-size: 7.8cqw; line-height: 0.97; }
-      .s19 .sc-lead { top: 36cqw; width: 34cqw; }
-      .s19 .sc-tag { top: 48.3cqw; }
-      .sc-rings { display: block; position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
-      .s19-steps { display: block; }
-      .s19-step {
-        position: absolute; width: 14cqw; padding: 0.4cqw 0.8cqw; border-left: 0;
-        background: var(--sc-cream);
-      }
-      .s19-step + .s19-step { margin-top: 0; }
-      .s19-step b { font-size: 1cqw; }
-      .s19-step b em { margin-bottom: 0; opacity: 1; }
-      .s19-step p { font-size: 0.95cqw; margin-top: 0.7cqw; }
-      .s19-step:nth-child(1) { left: 65.4cqw; top: 5.2cqw; }
-      .s19-step:nth-child(2) { left: 81.7cqw; top: 22.7cqw; }
-      .s19-step:nth-child(3) { left: 65.4cqw; top: 40.6cqw; }
-
-      /* Slide 20 */
-      .s20 .sc-h1 { top: 6.4cqw; font-size: 7.6cqw; line-height: 1.02; }
-      .s20 .sc-h1 .big { font-size: 10.6cqw; line-height: 0.98; }
-      .s20-range { position: absolute; left: 6.25cqw; top: 30.4cqw; font-size: 1.45cqw; }
-      .s20-bar { position: absolute; left: 6.25cqw; top: 34.6cqw; width: 31cqw; max-width: none; height: 0.4cqw; }
-      .s20-grid {
-        position: absolute; left: 45.6cqw; top: 8.3cqw;
-        grid-template-columns: 22cqw 22cqw; grid-auto-rows: 14.9cqw; gap: 5.2cqw;
-      }
-      .s20-card { padding: 1.9cqw 2.1cqw; min-height: 0; }
-      .s20-card small { font-size: 0.85cqw; }
-      .s20-card h3 { font-size: 2cqw; margin-top: 1.1cqw; }
-      .s20-card p { font-size: 0.92cqw; line-height: 1.4; padding-top: 0.9cqw; }
-
-      /* Slide 25 */
-      .s25 .sc-h1 { top: 7.9cqw; font-size: 7.5cqw; line-height: 0.93; }
-      .s25 .sc-lead { top: 26.2cqw; font-size: 1.45cqw; }
-      .s25-steps {
-        position: absolute; left: 7.5cqw; top: 39.8cqw; width: 82cqw; margin: 0;
-        display: grid; grid-template-columns: repeat(4, 20.1cqw);
-      }
-      .s25-steps::before { content: ''; position: absolute; left: 1.1cqw; right: 0; top: 1.1cqw; height: 0.3cqw; background: var(--sc-red); transform: translateY(-50%); }
-      .s25-step { padding: 4.2cqw 2cqw 0 0; }
-      .s25-step:last-child { padding-bottom: 0; }
-      .s25-step::before { display: none; }
-      .s25-node { width: 2.3cqw; height: 2.3cqw; font-size: 0.7cqw; }
-      .s25-step h3 { font-size: 0.95cqw; line-height: 1.2; }
-      .s25-step p { font-size: 1.05cqw; margin-top: 1.1cqw; line-height: 1.4; max-width: 17cqw; }
-    }
-
     /* ==========================================================
        .gx — generic slide layout in the PDF's 960x540 space.
        Mobile: everything flows in DOM order.
@@ -537,54 +445,200 @@
     .s29.gx { background: #141412; }
     .s32.gx { background: #bc1728; }
     .s27 .ftn { color: var(--sc-cream); }
-    .m-dk { color: var(--sc-ink) !important; }
-    .m-cr { color: var(--sc-cream) !important; }
+    @media (max-width: 999px) {
+      .m-dk { color: var(--sc-ink) !important; }
+      .m-cr { color: var(--sc-cream) !important; }
+    }
     .m-lg { font-size: clamp(24px, 7.5vw, 40px) !important; }
 
-    @media (min-width: 768px) {
-      .gx { --u: calc(100cqw / 960); background: none !important; }
-      .s28.gx { color: var(--sc-cream); }
-      .gx .ab {
-        position: absolute;
-        left: calc(var(--x) * var(--u)); top: calc(var(--y) * var(--u));
-        width: calc(var(--w) * var(--u)); height: calc(var(--h) * var(--u));
-        line-height: var(--lh, 1.3); margin: 0;
-      }
-      .gx.gx [style*="--fs"] { font-size: calc(var(--fs) * var(--u) * var(--k, 1)); }
-      /* sans text: Plus Jakarta has a smaller x-height than the PDF font, so nudge it up */
-      .gx .eb, .gx .sm, .gx .tx:not(.serif), .gx .it, .gx .gf, .gx .chip, .gx .contact p, .gx .tag-red, .gx .gray { --k: 1.12; }
-      .gx.gx [style*="--mt"] { margin-top: calc(var(--mt) * var(--u)); }
-      .gx .hd { white-space: nowrap; line-height: var(--lh, 1); }
-      .gx .hd.narrow { font-size: calc(var(--fs) * var(--u)); letter-spacing: -0.01em; }
-      .gx .hd + .hd { margin-top: 0; }
-      .gx .hd br { display: inline; }
-      .gx .ph { object-fit: cover; }
-      .gx .ph.logo { width: calc(var(--w) * var(--u)); object-fit: contain; }
-      .gx .deco { display: block; }
-      .gx .gf { margin: 0; padding: 0; }
-      .gx .it { padding: 0; border: 0; }
-      .gx .it b { font-size: 0.87em; }
-      .gx .list, .gx .list.two, .gx .chips { display: contents; }
-      .gx .chip { gap: calc(4 * var(--u)); padding: 0; border: 0; border-radius: 0; font-size: calc(var(--fs, 5.5) * var(--u)); }
-      .gx .chip i { width: calc(10 * var(--u)); height: calc(10 * var(--u)); }
-      .gx .panel { padding: 0; }
-      .gx .panel > * + * { margin-top: 0; }
-      .gx .panel-line { border-left: 0; border-right: 0; }
-      .gx .tag-red { padding: calc(6 * var(--u)) calc(12 * var(--u)); }
-      .gx .contact p { font-size: inherit; line-height: 1.25; }
-      .gx .contact .lg { font-size: inherit; }
-      .gx .quote-mark { font-size: calc(46 * var(--u)); }
-      .gx .who { border: 0; padding: 0; }
-      .gx .who .hd { font-size: calc(38 * var(--u)); line-height: 1.47; }
-      .m-lg { font-size: calc(var(--fs) * var(--u)) !important; }
-      .s27 .ftn { color: var(--sc-ink); }
+    /* ==========================================================
+       Layout wrappers (added by JS). Phones/tablets: invisible,
+       content flows in its original order. Desktop: real columns.
+       ========================================================== */
+    .gx-row, .gx-cols, .gx-col { display: contents; }
 
-      .gx .tl6 { display: grid; grid-template-columns: repeat(6, 1fr); text-align: center; }
-      .gx .tl6::before { content: ''; position: absolute; left: calc(40 * var(--u)); right: calc(40 * var(--u)); top: calc(6 * var(--u)); height: calc(1.5 * var(--u)); background: var(--sc-red); transform: translateY(-50%); }
+    /* Tablet portrait (768–999): same flow as phones, a bit roomier */
+    @media (min-width: 768px) and (max-width: 999px), (min-width: 1000px) and (max-aspect-ratio: 11/10) {
+      .slide-canvas { padding: 80px clamp(32px, 7vw, 72px) 96px; gap: 28px; }
+      .gx .hd { font-size: clamp(40px, 7vw, 64px); }
+      .gx .tx, .sc-lead { font-size: 19px; }
+      .gx .eb, .gx .sm, .sc-eyebrow, .sc-tag { font-size: 13px; }
+      .gx .it { font-size: 17px; }
+      .gx .list.two { grid-template-columns: repeat(3, 1fr); }
+      .gx .ph { max-width: 720px; max-height: min(62dvh, 600px); object-fit: cover; }
+    }
+
+    /* ==========================================================
+       Desktop (>= 1000px): fluid layout, readable text at any size.
+       Type scale is set once on the canvas and reused everywhere.
+       ========================================================== */
+    @media (min-width: 1000px) and (min-aspect-ratio: 11/10) {
+      .slide-html.slide-section { min-height: 100vh; min-height: 100dvh; align-items: center; }
+      .slide-html .slide-frame { align-items: center; }
+
+      .slide-canvas {
+        --pad: max(clamp(32px, 5vw, 88px), calc((100vw - 1360px) / 2));
+        --gap: clamp(28px, 4.4vh, 60px);
+        --gap-in: clamp(16px, 2.6vh, 32px);
+        --col-gap: clamp(36px, 5vw, 96px);
+        --fs-h: clamp(40px, 4.2vw, 72px);
+        --fs-body: clamp(17px, 1.25vw, 22px);
+        --fs-small: clamp(12.5px, 0.9vw, 15px);
+        --fs-item: clamp(16px, 1.12vw, 20px);
+        min-height: 100vh; min-height: 100dvh;
+        padding: clamp(56px, 9vh, 104px) var(--pad) clamp(88px, 12vh, 128px);
+        justify-content: center;
+        gap: var(--gap);
+      }
+      .slide-canvas.has-bleed { padding-block: 0; gap: 0; }
+
+      .gx-row { display: flex; flex-direction: column; gap: var(--gap-in); }
+      .gx-cols { display: grid; grid-template-columns: repeat(var(--n, 2), minmax(0, 1fr)); column-gap: var(--col-gap); align-items: center; }
+      .gx-col { display: flex; flex-direction: column; gap: var(--gap-in); min-width: 0; }
+
+      /* Full-bleed column rows (coloured panels) */
+      .gx-cols.bleed { width: 100vw; margin-inline: calc(50% - 50vw); column-gap: 0; align-items: stretch; min-height: 100vh; min-height: 100dvh; }
+      .gx-cols.bleed .gx-col { justify-content: center; padding-block: clamp(64px, 10vh, 112px); }
+      .gx-cols.bleed .gx-col:first-child { padding-left: var(--pad); padding-right: clamp(28px, 4vw, 72px); }
+      .gx-cols.bleed .gx-col:last-child { padding-right: var(--pad); padding-left: clamp(28px, 4vw, 72px); }
+
+      /* Footer sits at the bottom of the slide */
+      .gx .gf, .sc-foot {
+        position: absolute; left: var(--pad); right: var(--pad); bottom: clamp(18px, 3.2vh, 34px);
+        margin: 0; padding: 0; z-index: 2; font-size: var(--fs-small);
+      }
+
+      /* ---- Shared type scale (gx slides) ---- */
+      .gx .eb, .gx .sm, .gx .tag-red, .gx .chip { font-size: var(--fs-small); }
+      .gx .eb { letter-spacing: 0.1em; }
+      .gx .hd { font-size: var(--fs-h); line-height: 1.04; }
+      .gx .hd br { display: inline; }
+      .gx .hd + .hd { margin-top: 0; }
+      .gx .tx { font-size: var(--fs-body); line-height: 1.55; }
+      .gx .it, .gx .contact p { font-size: var(--fs-item); }
+      .gx .contact .lg { font-size: 1.1em; }
+      .gx .panel { padding: clamp(24px, 3vw, 48px); }
+      .gx .panel > * + * { margin-top: clamp(10px, 1.6vh, 18px); }
+      .gx .tag-red { padding: 0.9em 1.2em; }
+      .gx .ph { max-height: min(68dvh, 760px); object-fit: cover; }
+      .gx .ph.logo { width: clamp(200px, 17vw, 300px); max-height: none; object-fit: contain; }
+      .gx .deco.keep { display: block; height: 3px; width: 100%; }
+      .gx .quote-mark { font-size: clamp(64px, 6vw, 110px); }
+      .gx .who .hd { font-size: clamp(34px, 3.6vw, 60px); line-height: 1.15; }
+      .gx .who { padding-top: clamp(18px, 3vh, 32px); }
+      .m-lg { font-size: clamp(28px, 3.6vw, 60px) !important; }
+
+      /* Lists laid out in rows on desktop */
+      .gx .list.two { grid-template-columns: repeat(3, 1fr); gap: clamp(20px, 3vh, 36px) clamp(20px, 2.5vw, 44px); }
+      .s4 .list { grid-template-columns: repeat(5, 1fr); gap: clamp(16px, 2vw, 36px); }
+      .s7 .list { grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 2vw, 36px); }
+
+      /* Accent stripe beside photos (from the original design) */
+      .s18 .ph, .s21 .ph, .s26 .ph { box-shadow: calc(-1 * clamp(12px, 1.6vw, 26px)) 0 0 var(--sc-red); }
+      .s18 .ph { max-height: 78dvh; }
+
+      /* Horizontal journey timeline (slide 6) */
+      .gx .tl6 { position: relative; display: grid; grid-template-columns: repeat(6, 1fr); text-align: center; margin-top: clamp(8px, 2vh, 24px); }
+      .gx .tl6::before { content: ''; position: absolute; left: calc(100% / 12); right: calc(100% / 12); top: 22px; height: 3px; background: var(--sc-red); transform: translateY(-50%); }
       .gx .tl6 li { padding: 0; }
       .gx .tl6 li::before { display: none; }
-      .gx .tl6 .nd { position: relative; width: calc(12 * var(--u)); height: calc(12 * var(--u)); margin: 0 auto; font-size: calc(4 * var(--u)); }
-      .gx .tl6 b { line-height: 1.2; margin-top: calc(13 * var(--u)); font-size: calc(5.5 * var(--u)); letter-spacing: 0.04em; }
+      .gx .tl6 .nd { position: relative; z-index: 1; width: 44px; height: 44px; margin: 0 auto; font-size: 14px; }
+      .gx .tl6 b { line-height: 1.2; margin-top: 14px; font-size: var(--fs-small); letter-spacing: 0.06em; }
+
+      /* ---- Per-slide tuning ---- */
+      .s1 .hd.narrow { font-size: clamp(60px, 9.6vw, 156px); }
+      .s27 { --fs-h: clamp(34px, 3.5vw, 60px); }
+      .s24 .panel .hd { font-size: clamp(36px, 3.6vw, 62px); }
+      .s30 .gx-cols { grid-template-columns: 2fr 1fr; align-items: start; }
+      .s28, .s29, .s32 { --fs-h: clamp(40px, 4.4vw, 76px); }
+      .s29 { --fs-h: clamp(40px, 4.6vw, 80px); }
+      .s28.gx, .s29.gx, .s32.gx { background: none; }
+      .s28.gx { color: var(--sc-cream); }
+      .s27 .ftn { color: var(--sc-ink); }
+
+      /* s27: photo on a cream half */
+      .s27 .gx-cols.bleed { grid-template-columns: 54% 46%; }
+      .s27 .gx-col:last-child { background: var(--sc-cream); }
+
+      /* s28: dark | red stripe | cream */
+      .s28 .gx-cols.bleed { grid-template-columns: 44% 56%; }
+      .s28 .gx-col:last-child { background: var(--sc-cream); border-left: clamp(16px, 2vw, 32px) solid var(--sc-red); }
+
+      /* s29: red edge | dark | red contact panel */
+      .s29 .gx-cols.bleed { grid-template-columns: 72% 28%; }
+      .s29 .gx-col:first-child { background: #141412; border-left: clamp(16px, 2.3vw, 40px) solid var(--sc-red); }
+      .s29 .gx-col:last-child { background: #c1081f; }
+      .s29 .panel { padding: 0; }
+
+      /* s32: dark block top-left, red rest, contact band below */
+      .s32 .gx-cols.r1 { grid-template-columns: 28% 72%; min-height: 64dvh; }
+      .s32 .gx-cols.r2 { grid-template-columns: 35% 65%; min-height: 36dvh; }
+      .s32 .gx-cols.bleed .gx-col:first-child { background: #141412; }
+      .s32 .gx-cols.r2 .gx-col:last-child { flex-direction: row; gap: clamp(28px, 5vw, 96px); align-items: center; }
+      .s32 .gx-cols.r2 .gx-col:last-child .contact { flex: 1; }
+
+      /* ---- Older live slides (8, 19, 20, 25) ---- */
+      .sc-eyebrow, .sc-tag { font-size: var(--fs-small); letter-spacing: 0.1em; }
+      .sc-h1 { font-size: var(--fs-h); line-height: 1.02; }
+      .sc-lead { font-size: var(--fs-body); }
+
+      .s8-grid { grid-template-columns: 1fr 1fr; column-gap: var(--col-gap); }
+      .s8-item { padding: clamp(24px, 4vh, 48px) 0; }
+      .s8-item:last-child { border-bottom: 0; }
+      .s8-item:nth-last-child(-n+2) { border-bottom: 1px solid rgba(20, 20, 18, 0.16); }
+      .s8-title { font-size: clamp(36px, 4vw, 68px); }
+      .s8-time { font-size: var(--fs-small); }
+      .s8-desc { font-size: var(--fs-body); max-width: 30em; }
+
+      .s19-viz { position: relative; display: grid; place-items: center; aspect-ratio: 1; width: min(100%, 720px); margin-inline: auto; }
+      .s19-viz .sc-rings { display: block; position: absolute; inset: 0; width: 100%; height: 100%; }
+      .s19-steps { position: relative; width: 46%; text-align: center; }
+      .s19-step { border-left: 0; padding: clamp(8px, 1.4vh, 16px) 0; }
+      .s19-step + .s19-step { margin-top: 0; }
+      .s19-step b { font-size: var(--fs-small); }
+      .s19-step b em { display: inline; margin-right: 0.5em; }
+      .s19-step p { font-size: var(--fs-small); line-height: 1.4; margin-top: 4px; }
+
+      .s20 .sc-h1 .big { font-size: 1.4em; }
+      .s20-range { font-size: var(--fs-item); }
+      .s20-bar { height: 5px; }
+      .s20-grid { grid-template-columns: 1fr 1fr; gap: clamp(14px, 1.8vw, 28px); }
+      .s20-card { padding: clamp(20px, 2vw, 32px); min-height: clamp(150px, 20vh, 240px); }
+      .s20-card small { font-size: var(--fs-small); }
+      .s20-card h3 { font-size: clamp(24px, 2.1vw, 38px); }
+      .s20-card p { font-size: var(--fs-item); }
+
+      .s25-steps { display: grid; grid-template-columns: repeat(4, 1fr); column-gap: clamp(20px, 3vw, 48px); margin-top: clamp(20px, 5vh, 56px); }
+      .s25-steps::before { content: ''; position: absolute; left: 18px; right: 0; top: 18px; height: 3px; background: var(--sc-red); transform: translateY(-50%); }
+      .s25-step { padding: clamp(52px, 7vh, 64px) 0 0; }
+      .s25-step:last-child { padding-bottom: 0; }
+      .s25-step::before { display: none; }
+      .s25-node { width: 36px; height: 36px; font-size: 12px; }
+      .s25-step h3 { font-size: var(--fs-small); line-height: 1.2; }
+      .s25-step p { font-size: var(--fs-item); }
+    }
+
+    /* Photo slides: tap/click to zoom */
+    .slide-img[data-zoom] { cursor: zoom-in; }
+    .lightbox { position: fixed; inset: 0; z-index: 3000; background: rgba(10, 10, 9, 0.96); display: none; overflow: auto; -webkit-overflow-scrolling: touch; }
+    .lightbox.is-open { display: block; }
+    .lightbox img { display: block; margin: 0 auto; width: 100vw; max-width: none; height: auto; }
+    .lightbox-close { position: fixed; top: 14px; right: 14px; z-index: 3001; width: 44px; height: 44px; border: 0; border-radius: 50%; background: rgba(255, 255, 255, 0.14); color: #fff; font-size: 18px; cursor: pointer; }
+    .lightbox-hint { position: fixed; left: 0; right: 0; bottom: 14px; text-align: center; color: rgba(255, 255, 255, 0.6); font-size: 12px; pointer-events: none; }
+    @media (min-width: 1000px) {
+      .lightbox img { width: auto; max-width: 100vw; height: 100vh; object-fit: contain; }
+      .lightbox-hint { display: none; }
+    }
+    @media (max-width: 999px) {
+      .lightbox img { width: max(100vw, 160vh); }
+    }
+
+    /* ---------- Flow layout (phones, tablets, tall windows): no forced screen-height gaps ---------- */
+    @media (max-width: 999px), (max-aspect-ratio: 11/10) {
+      .slide-section { min-height: 0; padding: 10px 0; }
+      .slide-html.slide-section { padding: 0; }
+      .slide-frame { width: 100%; }
+      .slide-img { width: 100%; border-radius: 0; filter: none; }
     }
 
     /* ---------- Small screens: tighter image slides + controls ---------- */
@@ -720,19 +774,18 @@
       19: {
         theme: 'theme-light',
         html: `
-          <svg class="sc-rings" viewBox="0 0 1920 1080" aria-hidden="true">
-            <circle cx="1380" cy="490" r="330" fill="none" stroke="#c8162c" stroke-width="3"/>
-            <circle cx="1380" cy="490" r="275" fill="none" stroke="#d3ccc2" stroke-width="1.5"/>
-            <circle cx="1380" cy="490" r="220" fill="none" stroke="#c8162c" stroke-width="3"/>
-          </svg>
           <div class="sc-eyebrow">Interactive Decision System</div>
           <h2 class="sc-h1"><span>Your</span><span>Next</span><span>Question.</span></h2>
           <p class="sc-lead">An AI guide helps buyers explore the project, understand their options and take the next step.</p>
-          <ol class="s19-steps">
+          <div class="s19-viz"><svg class="sc-rings" viewBox="1030 140 700 700" aria-hidden="true">
+            <circle cx="1380" cy="490" r="330" fill="none" stroke="#c8162c" stroke-width="3"/>
+            <circle cx="1380" cy="490" r="275" fill="none" stroke="#d3ccc2" stroke-width="1.5"/>
+            <circle cx="1380" cy="490" r="220" fill="none" stroke="#c8162c" stroke-width="3"/>
+          </svg><ol class="s19-steps">
             <li class="s19-step"><b><em>01</em>WHY THIS PLACE?</b><p>Start with the life, location and point of view.</p></li>
             <li class="s19-step"><b><em>02</em>WHAT SUITS ME?</b><p>Move through approved spaces, plans and options.</p></li>
             <li class="s19-step"><b><em>03</em>WHAT NEXT?</b><p>Prepare the next useful sales conversation.</p></li>
-          </ol>
+          </ol></div>
           <div class="sc-tag">AI-guided project experience.</div>
           <div class="sc-foot"><span>FUTÉ 2.0</span><span>19</span></div>`
       },
@@ -909,10 +962,9 @@
         ${eb('04 / Portfolio experience system', 60, 32, { fs: 6 })}
         ${ph('p24', 60, 122, 486, 284, 'Rooftop terrace dining at night')}
         <div class="ab panel panel-ink" style="${S({ x: 548, y: 60, w: 352, h: 420 })};display:flex;flex-direction:column">
-          <h2 class="hd cr" style="${S({ fs: 42, lh: 1.15 })};margin:calc(38 * var(--u,1px)) 0 0 calc(42 * var(--u,0px))"><span style="font-size:1.24em">One</span><br> Portfolio.<br> Many ways<br> <span class="r" style="font-size:1.05em">In.</span></h2>
-          <div class="pg" style="margin-top:auto;padding:calc(20 * var(--u,1px)) 0 calc(50 * var(--u,0px)) calc(42 * var(--u,0px))">
-            <div style="height:1px;background:#c8162c;width:calc(254 * var(--u,1px));margin-bottom:calc(36 * var(--u,0px))" class="deco"></div>
-            <p class="tx" style="${S({ fs: 9, lh: 1.35 })};max-width:calc(230 * var(--u,1px))">Discovery, filtering, approved assets and a standard project-information template.</p>
+          <h2 class="hd cr" style="${S({ fs: 42, lh: 1.15 })}"><span style="font-size:1.24em">One</span><br> Portfolio.<br> Many ways<br> <span class="r" style="font-size:1.05em">In.</span></h2>
+          <div class="pg" style="margin-top:auto;padding-top:20px">
+            <p class="tx" style="${S({ fs: 9, lh: 1.35 })}">Discovery, filtering, approved assets and a standard project-information template.</p>
           </div>
         </div>
         <p class="ab tx" style="${S({ x: 58, y: 464, w: 480, fs: 9.5, lh: 1.2 })}">Create a connected experience across multiple projects, markets and assets.</p>
@@ -925,7 +977,7 @@
         ${ph('p26', 510, 71, 389, 219, 'Grand lobby with arched galleries')}
         <div class="ab panel panel-line" style="${S({ x: 500, y: 343, w: 400, h: 157 })}">
           <p class="sm r" style="${S({ fs: 7, mt: 17 })}">One story, in every experience.</p>
-          <p class="tx" style="${S({ fs: 10.5, lh: 1.2, mt: 26 })};max-width:calc(370 * var(--u,1px))">Create a clear buyer journey across strategy, imagery and interactive touchpoints.</p>
+          <p class="tx" style="${S({ fs: 10.5, lh: 1.2, mt: 26 })}">Create a clear buyer journey across strategy, imagery and interactive touchpoints.</p>
           <p class="sm" style="${S({ fs: 7, mt: 30 })};text-transform:none">One vision. Every experience. Aligned.</p>
         </div>
         ${ft('26', { w: 866 })}` },
@@ -956,7 +1008,7 @@
         ${eb('Start with the next buyer question', 60, 32, { fs: 7 })}
         <h2 class="ab hd cr" style="${S({ x: 60, y: 98, w: 650, fs: 58, lh: 1 })}">What Should<br> Your Buyer<br> Understand,<br> Feel And<br> <span class="r">Explore?</span></h2>
         <p class="ab tx" style="${S({ x: 58, y: 420, w: 640, fs: 12, lh: 1.1 })}">Start with what your buyers most need to understand: the location, the lifestyle, the plan or the differences between options.</p>
-        <div class="ab panel panel-red contact" style="${S({ x: 720, y: 0, w: 240, h: 540, fs: 9.5 })};padding-left:calc(38 * var(--u,0.58px))">
+        <div class="ab panel panel-red contact" style="${S({ x: 720, y: 0, w: 240, h: 540, fs: 9.5 })}">
           <p class="sm" style="${S({ fs: 8, mt: 98 })}">Contact</p>
           <p class="lg" style="${S({ fs: 11.5, mt: 22 })}"><a href="mailto:Soma@futeservices.com">Soma@futeservices.com</a></p>
           <p class="lg" style="${S({ fs: 11.5, mt: 15 })}"><a href="mailto:Payel@futeservices.com">Payel@futeservices.com</a></p>
@@ -1007,6 +1059,69 @@
         ${ft('32', { x: 62, w: 838 })}` }
     });
 
+    // Column layout per slide (indexes = position of each child in the slide markup).
+    // {i:[..]} = stacked row, {c:[[..],[..]]} = columns. Anything unlisted stays hidden/decorative.
+    const LAYOUT = {
+      2:  { rows: [{ i: [1] }, { c: [[2, 5, 6], [3, 4]] }] },
+      3:  { rows: [{ i: [0] }, { c: [[1, 4], [2, 3]] }] },
+      4:  { rows: [{ i: [0] }, { c: [[1], [2]] }, { i: [3, 4] }], keep: [3] },
+      5:  { rows: [{ i: [0] }, { c: [[1, 2, 3, 7], [4, 6]] }] },
+      6:  { rows: [{ i: [0] }, { i: [1, 2, 4] }, { i: [5] }] },
+      7:  { rows: [{ i: [0] }, { c: [[1, 2, 3], [4]] }, { i: [5] }] },
+      18: { rows: [{ c: [[0, 2, 4, 5], [3]] }] },
+      19: { rows: [{ c: [[0, 1, 2, 4], [3]] }] },
+      20: { rows: [{ i: [0] }, { c: [[1, 2, 3], [4]] }] },
+      21: { rows: [{ c: [[0, 2, 4, 5], [3]] }] },
+      22: { rows: [{ c: [[2], [0, 1, 3, 4]] }] },
+      23: { rows: [{ c: [[0, 1, 2], [3, 4]] }] },
+      24: { rows: [{ i: [0] }, { c: [[1, 3], [2]] }] },
+      26: { rows: [{ c: [[0, 2], [3, 4]] }] },
+      27: { rows: [{ c: [[0, 2, 4], [3]], cls: 'bleed' }] },
+      28: { rows: [{ c: [[0, 4], [3, 5, 6, 7]], cls: 'bleed' }] },
+      29: { rows: [{ c: [[2, 3, 4], [5]], cls: 'bleed' }] },
+      30: { rows: [{ i: [0] }, { c: [[1, 3], [4]] }] },
+      32: { rows: [{ c: [[3, 4], [5]], cls: 'bleed r1' }, { c: [[6, 7], [8, 9]], cls: 'bleed r2' }] }
+    };
+
+    function arrange(canvas, cfg) {
+      const kids = [...canvas.children];
+      kids.forEach((k, i) => { k.style.order = i; });          // phones keep the original reading order
+      const foot = kids.find(k => k.matches('.gf, .sc-foot'));
+      if (foot) foot.style.order = 999;
+      (cfg.keep || []).forEach(i => kids[i].classList.add('keep'));
+      const frag = document.createDocumentFragment();
+      cfg.rows.forEach(row => {
+        const w = document.createElement('div');
+        if (row.c) {
+          w.className = 'gx-cols ' + (row.cls || '');
+          w.style.setProperty('--n', row.c.length);
+          row.c.forEach(ix => {
+            const col = document.createElement('div');
+            col.className = 'gx-col';
+            ix.forEach(i => col.appendChild(kids[i]));
+            w.appendChild(col);
+          });
+          if (/bleed/.test(row.cls || '')) canvas.classList.add('has-bleed');
+        } else {
+          w.className = 'gx-row';
+          row.i.forEach(i => w.appendChild(kids[i]));
+        }
+        frag.appendChild(w);
+      });
+      canvas.insertBefore(frag, foot || null);
+    }
+
+    // Photo slides: tap/click to zoom
+    const lightbox = document.createElement('div');
+    lightbox.className = 'lightbox';
+    lightbox.innerHTML = '<button class="lightbox-close" aria-label="Close">✕</button><img alt=""><div class="lightbox-hint">Swipe to pan · tap to close</div>';
+    document.body.appendChild(lightbox);
+    const lbImg = lightbox.querySelector('img');
+    const closeLightbox = () => { lightbox.classList.remove('is-open'); document.body.style.overflow = ''; };
+    const openLightbox = img => { lbImg.src = img.src; lbImg.alt = img.alt; lightbox.classList.add('is-open'); document.body.style.overflow = 'hidden'; lightbox.scrollTo(0, 0); };
+    lightbox.addEventListener('click', closeLightbox);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
     const app = document.getElementById('app');
 
     // Build slide sections with exact colors
@@ -1027,6 +1142,7 @@
         canvas.setAttribute('role', 'group');
         canvas.setAttribute('aria-label', `Futé 2.0 Slide ${slide.id}`);
         canvas.innerHTML = live.html;
+        if (LAYOUT[slide.id]) arrange(canvas, LAYOUT[slide.id]);
         frame.appendChild(canvas);
       } else {
         const img = document.createElement('img');
@@ -1034,6 +1150,11 @@
         img.alt = `Futé 2.0 Slide ${slide.id}`;
         img.className = 'slide-img';
         img.loading = index < 2 ? 'eager' : 'lazy';
+        img.dataset.zoom = '';
+        img.tabIndex = 0;
+        img.setAttribute('role', 'button');
+        img.addEventListener('click', () => openLightbox(img));
+        img.addEventListener('keydown', e => { if (e.key === 'Enter') openLightbox(img); });
         frame.appendChild(img);
       }
 
