@@ -9,7 +9,7 @@
   <!-- Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Archivo+Narrow:wght@700&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -97,10 +97,12 @@
       filter: blur(0px);
     }
 
-    /* Subtle Continuous Hover Lift */
-    .slide-frame:hover .slide-img {
-      transform: translate3d(0, -4px, 0) scale(1.01);
-      transition: transform 0.6s var(--ease-lux);
+    /* Subtle Continuous Hover Lift (pointer devices only) */
+    @media (hover: hover) {
+      .slide-frame:hover .slide-img {
+        transform: translate3d(0, -4px, 0) scale(1.01);
+        transition: transform 0.6s var(--ease-lux);
+      }
     }
 
     /* Floating Contact Us Button with Pulsing Ambient Glow */
@@ -297,9 +299,316 @@
       letter-spacing: 1.2px;
     }
 
+    /* ==========================================================
+       Live-text slides (real HTML, responsive)
+       Mobile-first: stacked flow. Desktop (>=768px): 16:9 canvas
+       scaled with container units (1cqw = 1/100 of canvas width).
+       ========================================================== */
+    :root {
+      --font-serif: 'DejaVu Serif', Georgia, 'Times New Roman', serif;
+      --sc-cream: #f3f0e9;
+      --sc-ink: #161614;
+      --sc-red: #c8162c;
+    }
+
+    .slide-html.slide-section { padding: 0; min-height: 0; align-items: stretch; }
+    .slide-html .slide-frame { width: 100%; perspective: none; align-items: stretch; }
+
+    .slide-canvas {
+      position: relative;
+      width: 100%;
+      min-height: 100svh;
+      padding: 72px 24px 88px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      overflow: hidden;
+      opacity: 0.05;
+      transform: translate3d(0, 30px, 0);
+      transition: opacity 1.2s var(--ease-lux), transform 1.4s var(--ease-lux);
+    }
+    .slide-section.is-visible .slide-canvas { opacity: 1; transform: none; }
+    .theme-dark  { color: var(--sc-cream); }
+    .theme-light { color: var(--sc-ink); }
+
+    .sc-eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--sc-red); text-transform: uppercase; }
+    .sc-h1 {
+      font-family: var(--font-serif); font-weight: 700; text-transform: uppercase;
+      font-size: clamp(42px, 14vw, 76px); line-height: 0.98; letter-spacing: -0.01em;
+      overflow-wrap: anywhere;
+    }
+    .sc-h1 span { display: block; }
+    .sc-lead { font-size: 17px; line-height: 1.55; max-width: 34em; }
+    .sc-tag  { font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: var(--sc-red); text-transform: uppercase; }
+    .sc-foot {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-top: auto; padding-top: 28px;
+      font-size: 12px; font-weight: 700; letter-spacing: 0.04em;
+    }
+    .sc-rings { display: none; }
+
+    /* Slide 8: four beats */
+    .s8-grid { display: grid; grid-template-columns: 1fr; }
+    .s8-item { padding: 26px 0; border-top: 1px solid rgba(20, 20, 18, 0.16); }
+    .s8-item:last-child { border-bottom: 1px solid rgba(20, 20, 18, 0.16); }
+    .s8-title { font-family: var(--font-serif); font-weight: 700; text-transform: uppercase; font-size: clamp(28px, 9vw, 40px); line-height: 1.05; }
+    .s8-time  { margin-top: 14px; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: var(--sc-red); text-transform: uppercase; }
+    .s8-desc  { margin-top: 10px; font-size: 16px; line-height: 1.5; }
+
+    /* Slide 19: three questions */
+    .s19-steps { list-style: none; display: grid; gap: 0; }
+    .s19-step { padding: 20px 0 20px 22px; border-left: 2px solid var(--sc-red); position: relative; }
+    .s19-step + .s19-step { margin-top: 4px; }
+    .s19-step b { display: block; color: var(--sc-red); font-size: 13px; letter-spacing: 0.04em; }
+    .s19-step b em { font-style: normal; display: block; opacity: 0.85; margin-bottom: 4px; }
+    .s19-step p { margin-top: 8px; font-size: 15px; line-height: 1.5; }
+
+    /* Slide 20: four systems */
+    .s20-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+    .s20-bar { height: 4px; width: 100%; max-width: 320px; background: var(--sc-red); }
+    .s20-range { font-size: 16px; font-weight: 700; color: var(--sc-red); }
+    .s20-card { background: #c4081f; color: #fff; padding: 22px 20px; min-height: 150px; display: flex; flex-direction: column; }
+    .s20-card small { font-size: 12px; font-weight: 700; letter-spacing: 0.06em; }
+    .s20-card h3 { font-family: var(--font-serif); font-weight: 400; text-transform: uppercase; font-size: 24px; line-height: 1.08; margin-top: 14px; }
+    .s20-card p { margin-top: auto; padding-top: 18px; font-size: 14px; line-height: 1.5; opacity: 0.95; }
+
+    /* Slide 25: process timeline (vertical on mobile) */
+    .s25-steps { list-style: none; position: relative; margin-top: 8px; }
+    .s25-step { position: relative; padding: 0 0 30px 56px; }
+    .s25-step:last-child { padding-bottom: 0; }
+    .s25-step::before { content: ''; position: absolute; left: 15px; top: 32px; bottom: 0; width: 2px; background: var(--sc-red); }
+    .s25-step:last-child::before { display: none; }
+    .s25-node { position: absolute; left: 0; top: 0; width: 32px; height: 32px; border-radius: 50%; background: var(--sc-red); color: #fff; font-size: 11px; font-weight: 700; display: grid; place-items: center; }
+    .s25-step h3 { font-size: 13px; font-weight: 700; letter-spacing: 0.06em; color: var(--sc-red); text-transform: uppercase; line-height: 32px; }
+    .s25-step p { margin-top: 6px; font-size: 15px; line-height: 1.5; }
+
+    /* ---------- Desktop / tablet landscape: exact 16:9 canvas ---------- */
+    @media (min-width: 768px) {
+      .slide-canvas {
+        width: min(100%, calc((100dvh - 6vw) * 16 / 9));
+        min-height: 0;
+        margin: 0 auto;
+        padding: 0;
+        display: block;
+        aspect-ratio: 16 / 9;
+        container-type: inline-size;
+        border-radius: 4px;
+        filter: blur(8px);
+        transform: translate3d(0, 50px, 0) scale(0.965);
+        transition: opacity 1.4s var(--ease-lux), transform 1.6s var(--ease-lux), filter 1.4s var(--ease-lux);
+      }
+      .slide-section.is-visible .slide-canvas { filter: none; transform: none; }
+      .slide-html.slide-section { padding: 3vw 2vw; align-items: center; min-height: 100vh; min-height: 100dvh; }
+      .slide-html .slide-frame { align-items: center; }
+
+      .sc-eyebrow, .sc-h1, .sc-lead, .sc-tag { position: absolute; }
+      .sc-eyebrow { left: 6.25cqw; top: 3.4cqw; font-size: 0.83cqw; }
+      .sc-h1 { left: 6.25cqw; font-size: 7.6cqw; line-height: 0.96; white-space: nowrap; overflow-wrap: normal; }
+      .sc-lead { left: 6.25cqw; font-size: 1.4cqw; line-height: 1.35; width: 42cqw; }
+      .sc-tag { left: 6.25cqw; font-size: 0.83cqw; }
+      .sc-foot {
+        position: absolute; left: var(--pl, 6.25cqw); right: var(--pr, 3cqw); bottom: 2.1cqw;
+        margin: 0; padding: 0; font-size: 0.83cqw;
+      }
+
+      /* Slide 8 */
+      .s8 { --pl: 5cqw; --pr: 5cqw; }
+      .s8-grid {
+        position: absolute; left: 5cqw; top: 9.5cqw;
+        grid-template-columns: 34.4cqw 34.4cqw; column-gap: 12.7cqw;
+      }
+      .s8-item { height: 17.6cqw; padding: 0; border-top: 0; }
+      .s8-item:nth-child(n+3) { border-top: 1px solid rgba(20, 20, 18, 0.16); }
+      .s8-item:nth-child(n+3) .s8-title { margin-top: 0.4cqw; }
+      .s8-item:last-child, .s8-item:nth-last-child(2) { border-bottom: 1px solid rgba(20, 20, 18, 0.16); }
+      .s8-title { font-size: 3.2cqw; line-height: 1.1; margin-top: 0.4cqw; }
+      .s8-time { margin-top: 3.4cqw; font-size: 0.85cqw; }
+      .s8-desc { margin-top: 1.1cqw; font-size: 1.4cqw; line-height: 1.4; max-width: 34cqw; }
+      .s8 .sc-tag { left: 5cqw; top: 49.1cqw; }
+
+      /* Slide 19 */
+      .s19 .sc-h1 { top: 8.5cqw; font-size: 7.8cqw; line-height: 0.97; }
+      .s19 .sc-lead { top: 36cqw; width: 34cqw; }
+      .s19 .sc-tag { top: 48.3cqw; }
+      .sc-rings { display: block; position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+      .s19-steps { display: block; }
+      .s19-step {
+        position: absolute; width: 14cqw; padding: 0.4cqw 0.8cqw; border-left: 0;
+        background: var(--sc-cream);
+      }
+      .s19-step + .s19-step { margin-top: 0; }
+      .s19-step b { font-size: 1cqw; }
+      .s19-step b em { margin-bottom: 0; opacity: 1; }
+      .s19-step p { font-size: 0.95cqw; margin-top: 0.7cqw; }
+      .s19-step:nth-child(1) { left: 65.4cqw; top: 5.2cqw; }
+      .s19-step:nth-child(2) { left: 81.7cqw; top: 22.7cqw; }
+      .s19-step:nth-child(3) { left: 65.4cqw; top: 40.6cqw; }
+
+      /* Slide 20 */
+      .s20 .sc-h1 { top: 6.4cqw; font-size: 7.6cqw; line-height: 1.02; }
+      .s20 .sc-h1 .big { font-size: 10.6cqw; line-height: 0.98; }
+      .s20-range { position: absolute; left: 6.25cqw; top: 30.4cqw; font-size: 1.45cqw; }
+      .s20-bar { position: absolute; left: 6.25cqw; top: 34.6cqw; width: 31cqw; max-width: none; height: 0.4cqw; }
+      .s20-grid {
+        position: absolute; left: 45.6cqw; top: 8.3cqw;
+        grid-template-columns: 22cqw 22cqw; grid-auto-rows: 14.9cqw; gap: 5.2cqw;
+      }
+      .s20-card { padding: 1.9cqw 2.1cqw; min-height: 0; }
+      .s20-card small { font-size: 0.85cqw; }
+      .s20-card h3 { font-size: 2cqw; margin-top: 1.1cqw; }
+      .s20-card p { font-size: 0.92cqw; line-height: 1.4; padding-top: 0.9cqw; }
+
+      /* Slide 25 */
+      .s25 .sc-h1 { top: 7.9cqw; font-size: 7.5cqw; line-height: 0.93; }
+      .s25 .sc-lead { top: 26.2cqw; font-size: 1.45cqw; }
+      .s25-steps {
+        position: absolute; left: 7.5cqw; top: 39.8cqw; width: 82cqw; margin: 0;
+        display: grid; grid-template-columns: repeat(4, 20.1cqw);
+      }
+      .s25-steps::before { content: ''; position: absolute; left: 1.1cqw; right: 0; top: 1.1cqw; height: 0.3cqw; background: var(--sc-red); transform: translateY(-50%); }
+      .s25-step { padding: 4.2cqw 2cqw 0 0; }
+      .s25-step:last-child { padding-bottom: 0; }
+      .s25-step::before { display: none; }
+      .s25-node { width: 2.3cqw; height: 2.3cqw; font-size: 0.7cqw; }
+      .s25-step h3 { font-size: 0.95cqw; line-height: 1.2; }
+      .s25-step p { font-size: 1.05cqw; margin-top: 1.1cqw; line-height: 1.4; max-width: 17cqw; }
+    }
+
+    /* ==========================================================
+       .gx — generic slide layout in the PDF's 960x540 space.
+       Mobile: everything flows in DOM order.
+       Desktop: .ab elements are placed with --x/--y/--w/--h/--fs
+       expressed in PDF points, scaled by --u (= canvas width / 960).
+       ========================================================== */
+    .gx { gap: 20px; min-height: 0; }
+    .gx .gf { margin-top: 12px; }
+    .gx a { color: inherit; text-decoration: none; }
+    .gx .r  { color: var(--sc-red); }
+    .gx .cr { color: var(--sc-cream); }
+    .gx .dk { color: var(--sc-ink); }
+    .gx .gray { color: #555; }
+    .gx .eb { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--sc-red); text-transform: uppercase; }
+    .gx .hd {
+      font-family: var(--font-serif); font-weight: 700; text-transform: uppercase;
+      font-size: clamp(28px, 8.6vw, 60px); line-height: 1.02; overflow-wrap: anywhere;
+    }
+    .gx .hd + .hd { margin-top: -12px; }
+    .gx .hd br { display: none; }
+    .gx .hd.narrow { font-family: 'Archivo Narrow', 'Arial Narrow', Arial, sans-serif; font-size: clamp(38px, 12.5vw, 84px); letter-spacing: -0.01em; }
+    .gx .tx { font-size: 16px; line-height: 1.55; }
+    .gx .tx.serif { font-family: var(--font-serif); }
+    .gx .sm { font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+    .gx .ph { display: block; width: 100%; height: auto; }
+    .gx .ph.logo { width: 190px; }
+    .gx .deco { display: none; }
+    .gx .gf { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 24px; font-size: 12px; font-weight: 700; letter-spacing: 0.04em; }
+    .gx .it { font-size: 15px; line-height: 1.5; padding: 4px 0 4px 16px; border-left: 2px solid var(--sc-red); }
+    .gx .it b { display: block; color: var(--sc-red); font-size: 0.85em; letter-spacing: 0.06em; text-transform: uppercase; }
+    .gx .it p, .gx .it span { display: block; margin-top: 0.4em; }
+    .gx .it em { display: block; font-style: normal; color: var(--sc-red); font-size: 0.8em; font-weight: 700; }
+    .gx .list { display: grid; gap: 16px; }
+    .gx .list.two { grid-template-columns: 1fr 1fr; gap: 20px 16px; }
+    .gx .chips { list-style: none; display: flex; flex-wrap: wrap; gap: 10px; }
+    .gx .chip { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 8px 14px; border: 1px solid rgba(243, 240, 233, 0.25); border-radius: 999px; }
+    .gx .chip i { width: 9px; height: 9px; border-radius: 50%; background: var(--sc-red); flex: none; }
+    .gx .panel { padding: 24px 22px; }
+    .gx .panel-red  { background: #c1081f; color: #fff; }
+    .gx .panel-ink  { background: #141412; color: var(--sc-cream); }
+    .gx .panel-line { border-top: 1px solid rgba(243, 240, 233, 0.16); border-bottom: 1px solid rgba(243, 240, 233, 0.16); }
+    .gx .panel > * + * { margin-top: 14px; }
+    .gx .tag-red { display: block; background: var(--sc-red); color: #fff; padding: 10px 14px; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+    .gx .contact p { font-size: 15px; line-height: 1.4; }
+    .gx .contact .lg { font-size: 17px; }
+    .gx .quote-mark { font-family: var(--font-serif); font-size: 64px; line-height: 0.6; color: var(--sc-red); font-style: italic; }
+    .gx .quote p + p { margin-top: 1em; }
+    .gx .who { border-top: 1px solid var(--sc-red); padding-top: 18px; }
+    .gx .who .hd { font-size: clamp(30px, 9vw, 44px); }
+
+    .gx .tl6 { list-style: none; }
+    .gx .tl6 li { position: relative; padding: 0 0 26px 52px; }
+    .gx .tl6 li:last-child { padding-bottom: 0; }
+    .gx .tl6 li::before { content: ''; position: absolute; left: 15px; top: 32px; bottom: 0; width: 2px; background: var(--sc-red); }
+    .gx .tl6 li:last-child::before { display: none; }
+    .gx .tl6 .nd { position: absolute; left: 0; top: 0; width: 32px; height: 32px; border-radius: 50%; background: var(--sc-red); color: #fff; font-size: 11px; font-weight: 700; display: grid; place-items: center; }
+    .gx .tl6 b { display: block; line-height: 32px; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; }
+
+    /* Slides whose design is a coloured panel: keep it readable on phones */
+    .s28.gx { background: var(--sc-cream); color: var(--sc-ink); }
+    .s29.gx { background: #141412; }
+    .s32.gx { background: #bc1728; }
+    .s27 .ftn { color: var(--sc-cream); }
+    .m-dk { color: var(--sc-ink) !important; }
+    .m-cr { color: var(--sc-cream) !important; }
+    .m-lg { font-size: clamp(24px, 7.5vw, 40px) !important; }
+
+    @media (min-width: 768px) {
+      .gx { --u: calc(100cqw / 960); background: none !important; }
+      .s28.gx { color: var(--sc-cream); }
+      .gx .ab {
+        position: absolute;
+        left: calc(var(--x) * var(--u)); top: calc(var(--y) * var(--u));
+        width: calc(var(--w) * var(--u)); height: calc(var(--h) * var(--u));
+        line-height: var(--lh, 1.3); margin: 0;
+      }
+      .gx.gx [style*="--fs"] { font-size: calc(var(--fs) * var(--u) * var(--k, 1)); }
+      /* sans text: Plus Jakarta has a smaller x-height than the PDF font, so nudge it up */
+      .gx .eb, .gx .sm, .gx .tx:not(.serif), .gx .it, .gx .gf, .gx .chip, .gx .contact p, .gx .tag-red, .gx .gray { --k: 1.12; }
+      .gx.gx [style*="--mt"] { margin-top: calc(var(--mt) * var(--u)); }
+      .gx .hd { white-space: nowrap; line-height: var(--lh, 1); }
+      .gx .hd.narrow { font-size: calc(var(--fs) * var(--u)); letter-spacing: -0.01em; }
+      .gx .hd + .hd { margin-top: 0; }
+      .gx .hd br { display: inline; }
+      .gx .ph { object-fit: cover; }
+      .gx .ph.logo { width: calc(var(--w) * var(--u)); object-fit: contain; }
+      .gx .deco { display: block; }
+      .gx .gf { margin: 0; padding: 0; }
+      .gx .it { padding: 0; border: 0; }
+      .gx .it b { font-size: 0.87em; }
+      .gx .list, .gx .list.two, .gx .chips { display: contents; }
+      .gx .chip { gap: calc(4 * var(--u)); padding: 0; border: 0; border-radius: 0; font-size: calc(var(--fs, 5.5) * var(--u)); }
+      .gx .chip i { width: calc(10 * var(--u)); height: calc(10 * var(--u)); }
+      .gx .panel { padding: 0; }
+      .gx .panel > * + * { margin-top: 0; }
+      .gx .panel-line { border-left: 0; border-right: 0; }
+      .gx .tag-red { padding: calc(6 * var(--u)) calc(12 * var(--u)); }
+      .gx .contact p { font-size: inherit; line-height: 1.25; }
+      .gx .contact .lg { font-size: inherit; }
+      .gx .quote-mark { font-size: calc(46 * var(--u)); }
+      .gx .who { border: 0; padding: 0; }
+      .gx .who .hd { font-size: calc(38 * var(--u)); line-height: 1.47; }
+      .m-lg { font-size: calc(var(--fs) * var(--u)) !important; }
+      .s27 .ftn { color: var(--sc-ink); }
+
+      .gx .tl6 { display: grid; grid-template-columns: repeat(6, 1fr); text-align: center; }
+      .gx .tl6::before { content: ''; position: absolute; left: calc(40 * var(--u)); right: calc(40 * var(--u)); top: calc(6 * var(--u)); height: calc(1.5 * var(--u)); background: var(--sc-red); transform: translateY(-50%); }
+      .gx .tl6 li { padding: 0; }
+      .gx .tl6 li::before { display: none; }
+      .gx .tl6 .nd { position: relative; width: calc(12 * var(--u)); height: calc(12 * var(--u)); margin: 0 auto; font-size: calc(4 * var(--u)); }
+      .gx .tl6 b { line-height: 1.2; margin-top: calc(13 * var(--u)); font-size: calc(5.5 * var(--u)); letter-spacing: 0.04em; }
+    }
+
+    /* ---------- Small screens: tighter image slides + controls ---------- */
+    @media (max-width: 767px) {
+      .slide-section { min-height: 0; padding: 10px 0; }
+      .slide-html.slide-section { padding: 0; }
+      .slide-frame { width: 100%; }
+      .slide-img { width: 100%; border-radius: 0; filter: none; transition: opacity 1s var(--ease-lux), transform 1.2s var(--ease-lux); }
+      .btn-contact-floating { bottom: 16px; right: 16px; padding: 11px 18px; font-size: 13px; }
+      @media (max-width: 480px) {
+        .btn-contact-floating { width: 48px; height: 48px; padding: 0; justify-content: center; gap: 0; }
+        .btn-contact-floating span { display: none; }
+        .btn-contact-icon { width: 20px; height: 20px; }
+      }
+      .contact-overlay { padding: 14px; align-items: flex-start; overflow-y: auto; }
+      .contact-card { width: 100%; padding: 30px 22px 24px; margin: auto 0; }
+      .contact-title { font-size: 22px; }
+      .contact-tile { padding: 14px 16px; overflow-wrap: anywhere; }
+      .contact-tile:hover { transform: none; }
+    }
+
     /* Accessibility: Reduced Motion */
     @media (prefers-reduced-motion: reduce) {
-      body, .slide-section, .slide-img, .btn-contact-floating, .contact-overlay, .contact-card {
+      body, .slide-section, .slide-img, .slide-canvas, .btn-contact-floating, .contact-overlay, .contact-card {
         transition: none !important;
         transform: none !important;
         opacity: 1 !important;
@@ -393,6 +702,311 @@
       { id: 32, img: 'slides/s-32.jpg', bg: '#bc1728' }
     ];
 
+    // Slides rebuilt as live, responsive HTML (keyed by slide id).
+    // Any slide not listed here falls back to its image.
+    const HTML_SLIDES = {
+      8: {
+        theme: 'theme-light',
+        html: `
+          <div class="s8-grid">
+            <article class="s8-item"><h2 class="s8-title">Anticipation</h2><div class="s8-time">0–8 sec</div><p class="s8-desc">An active morning ritual reveals a character’s desire for a different pace.</p></article>
+            <article class="s8-item"><h2 class="s8-title">Arrival</h2><div class="s8-time">8–18 sec</div><p class="s8-desc">Move through the project’s arrival route; architecture enters through action.</p></article>
+            <article class="s8-item"><h2 class="s8-title">Belonging</h2><div class="s8-time">18–47 sec</div><p class="s8-desc">Shared life and a quieter personal moment make the place feel lived in.</p></article>
+            <article class="s8-item"><h2 class="s8-title">Memory</h2><div class="s8-time">47–60 sec</div><p class="s8-desc">Return to the opening gesture in an evening setting; end on the life she chooses.</p></article>
+          </div>
+          <div class="sc-tag">Character / Space / Light / Movement / Memory</div>
+          <div class="sc-foot"><span>FUTÉ 2.0</span><span>08</span></div>`
+      },
+      19: {
+        theme: 'theme-light',
+        html: `
+          <svg class="sc-rings" viewBox="0 0 1920 1080" aria-hidden="true">
+            <circle cx="1380" cy="490" r="330" fill="none" stroke="#c8162c" stroke-width="3"/>
+            <circle cx="1380" cy="490" r="275" fill="none" stroke="#d3ccc2" stroke-width="1.5"/>
+            <circle cx="1380" cy="490" r="220" fill="none" stroke="#c8162c" stroke-width="3"/>
+          </svg>
+          <div class="sc-eyebrow">Interactive Decision System</div>
+          <h2 class="sc-h1"><span>Your</span><span>Next</span><span>Question.</span></h2>
+          <p class="sc-lead">An AI guide helps buyers explore the project, understand their options and take the next step.</p>
+          <ol class="s19-steps">
+            <li class="s19-step"><b><em>01</em>WHY THIS PLACE?</b><p>Start with the life, location and point of view.</p></li>
+            <li class="s19-step"><b><em>02</em>WHAT SUITS ME?</b><p>Move through approved spaces, plans and options.</p></li>
+            <li class="s19-step"><b><em>03</em>WHAT NEXT?</b><p>Prepare the next useful sales conversation.</p></li>
+          </ol>
+          <div class="sc-tag">AI-guided project experience.</div>
+          <div class="sc-foot"><span>FUTÉ 2.0</span><span>19</span></div>`
+      },
+      20: {
+        theme: 'theme-dark',
+        html: `
+          <div class="sc-eyebrow">Four Commercial Systems</div>
+          <h2 class="sc-h1"><span class="big">Four</span><span>Systems</span></h2>
+          <div class="s20-range">01—04</div>
+          <div class="s20-bar"></div>
+          <div class="s20-grid">
+            <article class="s20-card"><small>01</small><h3>Launch Clarity</h3><p>Align the proposition, Story DNA, messaging and launch-content direction.</p></article>
+            <article class="s20-card"><small>02</small><h3>Buyer Story</h3><p>Connect narrative, CGI, film and lifestyle content.</p></article>
+            <article class="s20-card"><small>03</small><h3>Interactive Decision</h3><p>Organise project information into a guided experience.</p></article>
+            <article class="s20-card"><small>04</small><h3>Portfolio Experience</h3><p>Create consistent structure across projects and assets.</p></article>
+          </div>
+          <div class="sc-foot"><span>FUTÉ 2.0</span><span>20</span></div>`
+      },
+      25: {
+        theme: 'theme-dark',
+        html: `
+          <div class="sc-eyebrow">One approved vision / carried through delivery</div>
+          <h2 class="sc-h1"><span>How Teams</span><span>Align.</span></h2>
+          <p class="sc-lead">Leadership, design, marketing and sales. One approved project story, centred on the buyer.</p>
+          <ol class="s25-steps">
+            <li class="s25-step"><span class="s25-node">01</span><h3>Inputs</h3><p>Project brief, plans, model, brand assets and a named approval owner.</p></li>
+            <li class="s25-step"><span class="s25-node">02</span><h3>Direction</h3><p>Story DNA, visual direction, narrative treatment and sequence.</p></li>
+            <li class="s25-step"><span class="s25-node">03</span><h3>Production</h3><p>Approved imagery, film, interactive modules and review.</p></li>
+            <li class="s25-step"><span class="s25-node">04</span><h3>Handover</h3><p>Quality control, final files, rights record and sales-team orientation.</p></li>
+          </ol>
+          <div class="sc-foot"><span>FUTÉ 2.0</span><span>25</span></div>`
+      }
+    };
+
+    // ---- Slides laid out with the generic .gx system (PDF 960x540 coordinates) ----
+    const S = o => Object.entries(o).map(([k, v]) => `--${k}:${v}`).join(';');
+    const ft = (n, o = {}) => `<div class="ab gf ${o.cls || ''}" style="${S({ x: o.x ?? 60, y: o.y ?? 507, w: o.w ?? 840, fs: 6.5 })}"><span>${o.brand === false ? '' : 'FUTÉ 2.0'}</span><span class="gn ${o.ncls || ''}">${n}</span></div>`;
+    const ph = (src, x, y, w, h, alt = 'Project visual') => `<img class="ab ph" src="slides/photos/${src}.jpg" alt="${alt}" loading="lazy" style="${S({ x, y, w, h })}">`;
+    const deco = (x, y, w, h, css) => `<div class="ab deco" aria-hidden="true" style="${S({ x, y, w, h })};${css}"></div>`;
+    const eb = (t, x, y, o = {}) => `<div class="ab eb ${o.cls || ''}" style="${S({ x, y, w: o.w ?? 600, fs: o.fs ?? 6.5 })}">${t}</div>`;
+
+    Object.assign(HTML_SLIDES, {
+      1: { theme: 'theme-light', gx: true, html: `
+        <img class="ab ph logo" src="slides/photos/logo.jpg" alt="Futé Services — Futuristic Unique Trendy Exceptional" style="${S({ x: 46, y: 46, w: 235, h: 75 })}">
+        <p class="ab tx m-lg" style="${S({ x: 46, y: 241, w: 600, fs: 44, lh: 1.1 })}">The Real Estate</p>
+        <h1 class="ab hd narrow r" style="${S({ x: 44, y: 301, w: 900, fs: 92, lh: 1 })}">Buyer Experience</h1>
+        <p class="ab tx m-lg" style="${S({ x: 46, y: 395, w: 600, fs: 40, lh: 1.1 })}">Company</p>
+        <p class="ab tx gray" style="${S({ x: 48, y: 468, w: 600, fs: 15, lh: 1.3 })}">One vision. Every experience. Aligned.</p>
+        <span class="ab tx gray" style="${S({ x: 878, y: 514, w: 32, fs: 6 })};text-align:right">01</span>` },
+
+      2: { theme: 'theme-dark', gx: true, html: `
+        ${deco(60, 135, 8, 320, 'background:#c8162c')}
+        ${eb('FUTÉ 2.0 / The Real Estate Buyer Experience Company', 60, 32, { fs: 6 })}
+        <h2 class="ab hd cr" style="${S({ x: 100, y: 88, w: 400, fs: 60, lh: 1.17 })}">One<br> Vision.</h2>
+        <h2 class="ab hd cr" style="${S({ x: 490, y: 105, w: 440, fs: 45, lh: 1.24 })}">Every<br> Experience.<br> <span class="r">Aligned.</span></h2>
+        <ul class="chips">
+          <li class="ab chip" style="${S({ x: 760, y: 140 })}"><i></i>Strategy</li>
+          <li class="ab chip" style="${S({ x: 815, y: 215 })}"><i></i>Story</li>
+          <li class="ab chip" style="${S({ x: 765, y: 291 })}"><i></i>Imagery</li>
+          <li class="ab chip" style="${S({ x: 850, y: 361 })}"><i></i>Technology</li>
+          <li class="ab chip" style="${S({ x: 718, y: 407 })}"><i></i>Delivery</li>
+        </ul>
+        <p class="ab tx serif" style="${S({ x: 100, y: 386, w: 380, fs: 17, lh: 1.35 })}">Every vision, story and sales experience—aligned around the buyer.</p>
+        <p class="ab sm r" style="${S({ x: 100, y: 460, w: 500, fs: 5.5 })}">17 Years / India · Singapore · UAE · Australia</p>
+        ${ft('02')}` },
+
+      3: { theme: 'theme-light', gx: true, html: `
+        ${eb('17 years of making the unbuilt feel real', 60, 33, { fs: 6 })}
+        <h2 class="ab hd" style="${S({ x: 60, y: 90, w: 380, fs: 45, lh: 0.84 })}">A Practice<br> Shaped<br> Across<br> Places.</h2>
+        ${eb('Project markets / India · Singapore · UAE · Australia', 440, 60, { fs: 5.5 })}
+        ${ph('p03', 440, 100, 495, 278, 'Waterfront towers and promenade')}
+        <div class="list two">
+          <div class="ab it" style="${S({ x: 60, y: 390, w: 130, fs: 8 })}"><b style="font-size:.75em">2009</b><span>Bengaluru</span></div>
+          <div class="ab it" style="${S({ x: 205, y: 390, w: 130, fs: 8 })}"><b style="font-size:.75em">2014</b><span>Across India</span></div>
+          <div class="ab it" style="${S({ x: 350, y: 390, w: 130, fs: 8 })}"><b style="font-size:.75em">2016</b><span>Singapore</span></div>
+          <div class="ab it" style="${S({ x: 60, y: 450, w: 130, fs: 8 })}"><b style="font-size:.75em">2017</b><span>UAE</span></div>
+          <div class="ab it" style="${S({ x: 205, y: 450, w: 130, fs: 8 })}"><b style="font-size:.75em">2023</b><span>Australia</span></div>
+          <div class="ab it" style="${S({ x: 350, y: 450, w: 130, fs: 8 })}"><b style="font-size:.75em">2026</b><span>Futé 2.0</span></div>
+        </div>
+        ${ft('03')}` },
+
+      4: { theme: 'theme-dark', gx: true, html: `
+        <div class="ab eb" style="${S({ x: 58, y: 32, w: 400, fs: 6.5 })};text-transform:none">Five connected disciplines.</div>
+        <h2 class="ab hd cr" style="${S({ x: 60, y: 113, w: 420, fs: 48, lh: 1.1 })}">The Buyer<br> Stays At<br> <span class="r">The<br> Centre.</span></h2>
+        ${ph('p04', 490, 130, 410, 231, 'Landscaped arrival street at dusk')}
+        ${deco(60, 394, 840, 3, 'background:#c8162c')}
+        <div class="list">
+          <div class="ab it" style="${S({ x: 60, y: 425, w: 150, fs: 6.3 })}"><b>Strategy</b><p>Define what matters to the buyer.</p></div>
+          <div class="ab it" style="${S({ x: 228, y: 425, w: 150, fs: 6.3 })}"><b>Story</b><p>Give the project human meaning.</p></div>
+          <div class="ab it" style="${S({ x: 396, y: 425, w: 150, fs: 6.3 })}"><b>Imagery</b><p>Make the place tangible through craft.</p></div>
+          <div class="ab it" style="${S({ x: 564, y: 425, w: 150, fs: 6.3 })}"><b>Technology</b><p>Make project information explorable.</p></div>
+          <div class="ab it" style="${S({ x: 732, y: 425, w: 150, fs: 6.3 })}"><b>Delivery</b><p>Carry one vision through every output.</p></div>
+        </div>
+        ${ft('04')}` },
+
+      5: { theme: 'theme-light', gx: true, html: `
+        ${eb('The human idea', 60, 32, { fs: 6 })}
+        <h2 class="ab hd" style="${S({ x: 60, y: 79, w: 420, fs: 56, lh: 1.04 })}">A Place<br> Becomes<br> Personal</h2>
+        <h2 class="ab hd r" style="${S({ x: 60, y: 266, w: 420, fs: 45, lh: 1.02 })}">Through<br> Life.</h2>
+        <p class="ab tx" style="${S({ x: 58, y: 370, w: 410, fs: 11.5, lh: 1.26 })}">We begin with the life people imagine in a place. We connect strategy, story, imagery and technology to make that vision tangible.</p>
+        ${ph('p05', 490, 139, 410, 231, 'Landscaped terrace lounge')}
+        ${deco(490, 391, 410, 1, 'background:#c8162c')}
+        <p class="ab tx" style="${S({ x: 488, y: 419, w: 210, fs: 9.5, lh: 1.25 })}">A shared emotional thread guides every buyer experience.</p>
+        <p class="ab sm r" style="${S({ x: 60, y: 460, w: 500, fs: 5.5 })}">Light / Material / Movement / Memory</p>
+        ${ft('05', { w: 840 })}` },
+
+      6: { theme: 'theme-dark', gx: true, html: `
+        ${eb('The connected buyer journey', 64, 33, { fs: 6 })}
+        <h2 class="ab hd cr" style="${S({ x: 64, y: 88, w: 380, fs: 45, lh: 0.87 })}">From A<br> Feeling<br> To A</h2>
+        <h2 class="ab hd r" style="${S({ x: 64, y: 250, w: 380, fs: 45, lh: 1 })}">Decision.</h2>
+        ${deco(64, 324, 326, 2, 'background:#c8162c')}
+        <p class="ab tx" style="${S({ x: 64, y: 350, w: 230, fs: 14, lh: 1.2 })}">Six stages. One connected buyer experience.</p>
+        <ol class="ab tl6" style="${S({ x: 425, y: 264, w: 480, fs: 5.5 })}">
+          <li><span class="nd">01</span><b>Discover</b></li><li><span class="nd">02</span><b>Understand</b></li>
+          <li><span class="nd">03</span><b>Believe</b></li><li><span class="nd">04</span><b>Explore</b></li>
+          <li><span class="nd">05</span><b>Compare</b></li><li><span class="nd">06</span><b>Decide</b></li>
+        </ol>
+        ${ft('06', { x: 64, w: 836 })}` },
+
+      7: { theme: 'theme-dark', gx: true, html: `
+        ${eb('Buyer story system / Lifestyle film', 60, 32, { fs: 6 })}
+        <h2 class="ab hd cr" style="${S({ x: 60, y: 91, w: 360, fs: 63, lh: 1 })}">Life,</h2>
+        <h2 class="ab hd cr" style="${S({ x: 60, y: 169, w: 380, fs: 55, lh: 1.07 })}">In Every<br> <span class="r">Frame.</span></h2>
+        <p class="ab tx" style="${S({ x: 60, y: 333, w: 320, fs: 11.5, lh: 1.3 })}">A lifestyle film begins with a character, then follows the moments where architecture becomes part of that person’s day.</p>
+        ${ph('p07', 440, 96, 460, 259, 'Restaurant interior with guests')}
+        <div class="list">
+          <div class="ab it" style="${S({ x: 440, y: 428, w: 140, fs: 6.5 })}"><em>01</em><b>Anticipation</b><span>The life they imagine.</span></div>
+          <div class="ab it" style="${S({ x: 595, y: 428, w: 140, fs: 6.5 })}"><em>02</em><b>Arrival</b><span>A place becoming possible.</span></div>
+          <div class="ab it" style="${S({ x: 755, y: 428, w: 140, fs: 6.5 })}"><em>03</em><b>Belonging</b><span>A memory in the making.</span></div>
+        </div>
+        ${ft('07')}` },
+
+      18: { theme: 'theme-dark', gx: true, html: `
+        ${eb('AI-supported creative production', 48, 34, { fs: 6 })}
+        ${deco(465, 0, 18, 540, 'background:#c8162c')}
+        <h2 class="ab hd cr" style="${S({ x: 48, y: 99, w: 430, fs: 34, lh: 1.3 })}">The Character<br> Gives Us<br> Someone<br> To Follow.</h2>
+        ${ph('p18', 512, 0, 448, 540, 'Rooftop terrace dining at night')}
+        <p class="ab tx" style="${S({ x: 48, y: 358, w: 410, fs: 10, lh: 1.25 })}">AI supports character creation and creative production. The story unfolds from the buyer’s perspective.</p>
+        <p class="ab sm r" style="${S({ x: 48, y: 445, w: 410, fs: 5 })}">Character / Wardrobe / Light / Camera / Continuity</p>
+        ${ft('18', { x: 48, w: 880, ncls: 'cr' })}` },
+
+      21: { theme: 'theme-dark', gx: true, html: `
+        ${eb('01 / Launch clarity system', 60, 32, { fs: 6 })}
+        ${deco(404, 0, 68, 540, 'background:#c8162c')}
+        <h2 class="ab hd cr" style="${S({ x: 60, y: 113, w: 420, fs: 55, lh: 1.16 })}">Clarity<br> Before<br> Content.</h2>
+        ${ph('p21', 474, 144, 456, 270, 'Residential towers and green boulevard')}
+        <p class="ab tx" style="${S({ x: 60, y: 332, w: 300, fs: 11.5, lh: 1.28 })}">Align the project’s positioning, Story DNA and launch experience before content production begins.</p>
+        <p class="ab sm r" style="${S({ x: 60, y: 459, w: 400, fs: 5 })}">Buyer definition / Messaging / Visual direction / Sequencing</p>
+        ${deco(58, 486, 332, 11, 'background:#f3f0e9')}
+        ${ft('21', { w: 860 })}` },
+
+      22: { theme: 'theme-light', gx: true, html: `
+        ${eb('02 / Buyer story system', 590, 32, { fs: 5.5 })}
+        <h2 class="ab hd" style="${S({ x: 590, y: 103, w: 340, fs: 45, lh: 1.3 })}">From<br> Project<br> To Belief</h2>
+        ${ph('p22', 40, 133, 499, 281, 'Grand restaurant interior')}
+        <p class="ab tx" style="${S({ x: 590, y: 330, w: 280, fs: 10.5, lh: 1.3 })}">Turn an unbuilt project into a coherent story buyers can understand, feel and remember.</p>
+        <p class="ab tag-red" style="${S({ x: 590, y: 426, w: 262, h: 36, fs: 5, lh: 1.25 })}">Narrative / CGI / Film<br> Masterplan / Human moments</p>
+        ${ft('22', { w: 866 })}` },
+
+      23: { theme: 'theme-dark', gx: true, html: `
+        ${eb('03 / Interactive decision system', 60, 32, { fs: 6 })}
+        <h2 class="ab hd cr" style="${S({ x: 60, y: 108, w: 420, fs: 45, lh: 1.2 })}">Explore<br> Without<br> <span class="r">The Noise.</span></h2>
+        <p class="ab tx" style="${S({ x: 60, y: 366, w: 340, fs: 10.5, lh: 1.3 })}">Help buyers explore and compare approved project information through connected interactive experiences.</p>
+        ${eb('The buyer path', 565, 80, { fs: 5 })}
+        <div class="list">
+          <div class="ab it" style="${S({ x: 600, y: 105, w: 300, fs: 7 })}"><em>01</em><b style="color:inherit">Location</b><span style="opacity:.6">Begin with context.</span></div>
+          <div class="ab it" style="${S({ x: 600, y: 185, w: 300, fs: 7 })}"><em>02</em><b style="color:inherit">Spaces</b><span style="opacity:.6">Move into what matters.</span></div>
+          <div class="ab it" style="${S({ x: 600, y: 265, w: 300, fs: 7 })}"><em>03</em><b style="color:inherit">Options</b><span style="opacity:.6">Compare with clarity.</span></div>
+          <div class="ab it" style="${S({ x: 600, y: 345, w: 300, fs: 7 })}"><em>04</em><b style="color:inherit">Next step</b><span style="opacity:.6">Make the sales conversation useful.</span></div>
+        </div>
+        ${ft('23', { w: 860 })}` },
+
+      24: { theme: 'theme-light', gx: true, html: `
+        ${eb('04 / Portfolio experience system', 60, 32, { fs: 6 })}
+        ${ph('p24', 60, 122, 486, 284, 'Rooftop terrace dining at night')}
+        <div class="ab panel panel-ink" style="${S({ x: 548, y: 60, w: 352, h: 420 })};display:flex;flex-direction:column">
+          <h2 class="hd cr" style="${S({ fs: 42, lh: 1.15 })};margin:calc(38 * var(--u,1px)) 0 0 calc(42 * var(--u,0px))"><span style="font-size:1.24em">One</span><br> Portfolio.<br> Many ways<br> <span class="r" style="font-size:1.05em">In.</span></h2>
+          <div class="pg" style="margin-top:auto;padding:calc(20 * var(--u,1px)) 0 calc(50 * var(--u,0px)) calc(42 * var(--u,0px))">
+            <div style="height:1px;background:#c8162c;width:calc(254 * var(--u,1px));margin-bottom:calc(36 * var(--u,0px))" class="deco"></div>
+            <p class="tx" style="${S({ fs: 9, lh: 1.35 })};max-width:calc(230 * var(--u,1px))">Discovery, filtering, approved assets and a standard project-information template.</p>
+          </div>
+        </div>
+        <p class="ab tx" style="${S({ x: 58, y: 464, w: 480, fs: 9.5, lh: 1.2 })}">Create a connected experience across multiple projects, markets and assets.</p>
+        ${ft('24', { w: 866 })}` },
+
+      26: { theme: 'theme-dark', gx: true, html: `
+        ${eb('A voice people recognise', 60, 32, { fs: 6 })}
+        ${deco(440, 0, 30, 540, 'background:#c8162c')}
+        <h2 class="ab hd cr" style="${S({ x: 60, y: 101, w: 470, fs: 56, lh: 1.2 })}">Begin<br> With The<br> <span class="r">Person.</span></h2>
+        ${ph('p26', 510, 71, 389, 219, 'Grand lobby with arched galleries')}
+        <div class="ab panel panel-line" style="${S({ x: 500, y: 343, w: 400, h: 157 })}">
+          <p class="sm r" style="${S({ fs: 7, mt: 17 })}">One story, in every experience.</p>
+          <p class="tx" style="${S({ fs: 10.5, lh: 1.2, mt: 26 })};max-width:calc(370 * var(--u,1px))">Create a clear buyer journey across strategy, imagery and interactive touchpoints.</p>
+          <p class="sm" style="${S({ fs: 7, mt: 30 })};text-transform:none">One vision. Every experience. Aligned.</p>
+        </div>
+        ${ft('26', { w: 866 })}` },
+
+      27: { theme: 'theme-dark', gx: true, html: `
+        ${eb('FUTÉ 2.0 / Global perspective', 60, 32, { fs: 6 })}
+        ${deco(498, 0, 462, 540, 'background:#f3f0e9')}
+        <h2 class="ab hd cr" style="${S({ x: 60, y: 106, w: 440, fs: 44, lh: 1.3 })}">A World<br> Of<br> Different<br> Perspectives.</h2>
+        ${ph('p27', 520, 189, 400, 225, 'Rooftop infinity pool')}
+        <p class="ab tx serif" style="${S({ x: 60, y: 378, w: 330, fs: 12.5, lh: 1.7 })}">A distinctly local project story, held to an international standard of experience.</p>
+        ${deco(60, 457, 320, 28, 'border:calc(9 * var(--u)) solid #c8162c;box-sizing:border-box')}
+        ${ft('27', { w: 866, ncls: 'ftn' })}` },
+
+      28: { theme: 'theme-dark', gx: true, html: `
+        ${eb('The client and the buyer', 40, 62, { fs: 6.5, cls: 'cr m-dk' })}
+        ${deco(400, 0, 28, 540, 'background:#c8162c')}
+        ${deco(428, 0, 532, 540, 'background:#f3f0e9')}
+        <h2 class="ab hd dk" style="${S({ x: 480, y: 100, w: 470, fs: 65, lh: 1.05 })}">One<br> Coherent<br> Story.</h2>
+        ${ph('p28', 40, 212, 320, 180, 'Restaurant interior with sculpted ceiling')}
+        <p class="ab tag-red" style="${S({ x: 480, y: 326, w: 330, h: 23, fs: 6.5 })};display:flex;align-items:center">The developer is Futé’s client.</p>
+        <p class="ab tx serif dk" style="${S({ x: 480, y: 366, w: 340, fs: 16.5, lh: 1.27 })}">The property buyer is the developer’s customer. Every output must serve the developer’s communication needs and the buyer’s understanding.</p>
+        <p class="ab sm r" style="${S({ x: 480, y: 475, w: 440, fs: 6.5 })}">Strategy / Story / Imagery / Technology / Delivery</p>
+        ${ft('28', { x: 40, w: 886, brand: false, ncls: 'dk' })}` },
+
+      29: { theme: 'theme-dark', gx: true, html: `
+        ${deco(0, 0, 22, 540, 'background:#c8162c')}
+        ${deco(22, 0, 698, 540, 'background:#141412')}
+        ${eb('Start with the next buyer question', 60, 32, { fs: 7 })}
+        <h2 class="ab hd cr" style="${S({ x: 60, y: 98, w: 650, fs: 58, lh: 1 })}">What Should<br> Your Buyer<br> Understand,<br> Feel And<br> <span class="r">Explore?</span></h2>
+        <p class="ab tx" style="${S({ x: 58, y: 420, w: 640, fs: 12, lh: 1.1 })}">Start with what your buyers most need to understand: the location, the lifestyle, the plan or the differences between options.</p>
+        <div class="ab panel panel-red contact" style="${S({ x: 720, y: 0, w: 240, h: 540, fs: 9.5 })};padding-left:calc(38 * var(--u,0.58px))">
+          <p class="sm" style="${S({ fs: 8, mt: 98 })}">Contact</p>
+          <p class="lg" style="${S({ fs: 11.5, mt: 22 })}"><a href="mailto:Soma@futeservices.com">Soma@futeservices.com</a></p>
+          <p class="lg" style="${S({ fs: 11.5, mt: 15 })}"><a href="mailto:Payel@futeservices.com">Payel@futeservices.com</a></p>
+          <p style="${S({ fs: 9.5, mt: 14 })}">Payel — India &nbsp;<a href="tel:+919742223928">+91 97422 23928</a></p>
+          <p style="${S({ fs: 9.5, mt: 10 })}">India alternate &nbsp;<a href="tel:+918792808870">+91 87928 08870</a></p>
+          <p style="${S({ fs: 9.5, mt: 15 })}">Payel — Australia</p>
+          <p class="lg" style="${S({ fs: 11, mt: 6 })}"><a href="tel:+61493165725">+61 493 165 725</a></p>
+          <p style="${S({ fs: 9.5, mt: 13 })}">Amelia</p>
+          <p class="lg" style="${S({ fs: 11.5, mt: 7 })}"><a href="mailto:amelia@futeservices.com">amelia@futeservices.com</a></p>
+          <p style="${S({ fs: 9.5, mt: 22 })}">INDIA &nbsp;|&nbsp; AUSTRALIA &nbsp;|&nbsp; DUBAI</p>
+        </div>
+        ${ft('29', { w: 866 })}` },
+
+      30: { theme: 'theme-dark', gx: true, html: `
+        ${eb('Client testimonial', 60, 32, { fs: 6 })}
+        <div class="ab quote-mark" style="${S({ x: 60, y: 62, w: 40 })}" aria-hidden="true">“</div>
+        ${deco(90, 68, 810, 1, 'background:#c8162c')}
+        <blockquote class="ab quote tx" style="${S({ x: 105, y: 124, w: 580, fs: 11.5, lh: 1.65 })}">
+          <p>Dear Fute Team,</p>
+          <p>I am glad to inform you that all serviced apartments at Hiranandani Sands, Alibaug has been sold out in 1 day i.e. Saturday and that too in record time. So would like to congratulate all of you for your unwavering support and timely delivery. The entire presentation with walkthroughs made the pitch very strong. The brochure with static renders has also come out very nice. Overall very good work.</p>
+          <p>So once again kudos and congrats to each one of us for making it a grand success once again.</p>
+        </blockquote>
+        <div class="ab who" style="${S({ x: 710, y: 152, w: 215 })}">
+          <h2 class="hd cr">Sumon<br> <span class="r">Das.</span></h2>
+          <p class="sm" style="${S({ fs: 5.5, mt: 12 })}">Marketing Head</p>
+        </div>
+        ${deco(710, 304, 215, 1, 'background:#c8162c')}
+        ${ft('30', { w: 866 })}` },
+
+      32: { theme: 'theme-dark', gx: true, html: `
+        ${deco(0, 0, 255, 395, 'background:#141412')}
+        ${deco(0, 395, 340, 145, 'background:#141412')}
+        ${deco(62, 394, 838, 1, 'background:rgba(243,240,233,.5)')}
+        ${eb('FUTÉ 2.0', 48, 36, { fs: 5.5, cls: 'm-cr' })}
+        <h2 class="ab hd cr" style="${S({ x: 48, y: 83, w: 210, fs: 34, lh: 1.47 })}">One<br> Vision.</h2>
+        <h2 class="ab hd cr" style="${S({ x: 308, y: 82, w: 620, fs: 34, lh: 1.47 })}">Every<br> Experience.<br> Aligned.</h2>
+        <p class="ab sm cr" style="${S({ x: 62, y: 419, w: 270, fs: 5.5 })}">The Real Estate Buyer Experience Company</p>
+        <p class="ab tx cr" style="${S({ x: 62, y: 458, w: 270, fs: 8 })}"><a href="https://futeservices.com">futeservices.com</a></p>
+        <div class="ab contact cr" style="${S({ x: 410, y: 417, w: 250, fs: 7.5 })}">
+          <p><a href="mailto:Soma@futeservices.com">Soma@futeservices.com</a></p>
+          <p style="${S({ mt: 10 })}"><a href="mailto:Payel@futeservices.com">Payel@futeservices.com</a></p>
+          <p style="${S({ fs: 6, mt: 7 })}">Payel — India &nbsp;<a href="tel:+919742223928">+91 97422 23928</a></p>
+        </div>
+        <div class="ab contact cr" style="${S({ x: 680, y: 417, w: 260, fs: 7.5 })}">
+          <p><a href="mailto:amelia@futeservices.com">amelia@futeservices.com</a></p>
+          <p style="${S({ fs: 6, mt: 10 })}">Payel — Australia &nbsp;<a href="tel:+61493165725">+61 493 165 725</a></p>
+        </div>
+        ${ft('32', { x: 62, w: 838 })}` }
+    });
+
     const app = document.getElementById('app');
 
     // Build slide sections with exact colors
@@ -405,13 +1019,24 @@
       const frame = document.createElement('div');
       frame.className = 'slide-frame';
 
-      const img = document.createElement('img');
-      img.src = slide.img;
-      img.alt = `Futé 2.0 Slide ${slide.id}`;
-      img.className = 'slide-img';
-      img.loading = index < 2 ? 'eager' : 'lazy';
+      const live = HTML_SLIDES[slide.id];
+      if (live) {
+        section.classList.add('slide-html');
+        const canvas = document.createElement('div');
+        canvas.className = `slide-canvas ${live.theme} ${live.gx ? 'gx ' : ''}s${slide.id}`;
+        canvas.setAttribute('role', 'group');
+        canvas.setAttribute('aria-label', `Futé 2.0 Slide ${slide.id}`);
+        canvas.innerHTML = live.html;
+        frame.appendChild(canvas);
+      } else {
+        const img = document.createElement('img');
+        img.src = slide.img;
+        img.alt = `Futé 2.0 Slide ${slide.id}`;
+        img.className = 'slide-img';
+        img.loading = index < 2 ? 'eager' : 'lazy';
+        frame.appendChild(img);
+      }
 
-      frame.appendChild(img);
       section.appendChild(frame);
       app.appendChild(section);
     });
