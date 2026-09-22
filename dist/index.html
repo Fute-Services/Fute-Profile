@@ -1,0 +1,1207 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Futé 2.0 — The Real Estate Buyer Experience Company</title>
+  <meta name="description" content="One vision. Every experience. Aligned. Futuristic Unique Trendy Exceptional Real Estate Buyer Experience Profile.">
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Archivo+Narrow:wght@700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --fute-red: #c8162c;
+      --fute-red-hover: #e01933;
+      --fute-dark: #141412;
+      --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --ease-lux: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-smooth: cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: #ffffff;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      background-color: #ffffff;
+      /* Liquid smooth background color transition */
+      transition: background-color 1.2s var(--ease-lux);
+      font-family: var(--font-main);
+      overflow-x: hidden;
+    }
+
+    /* Scroll Container */
+    .slide-section {
+      width: 100%;
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 3vw 2vw;
+      transition: background-color 1.2s var(--ease-lux);
+      overflow: hidden;
+    }
+
+    /* Slide Frame with Subtle Parallax Perspective */
+    .slide-frame {
+      position: relative;
+      max-width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      perspective: 1000px;
+    }
+
+    /* Silky Smooth Reveal Animation */
+    .slide-img {
+      display: block;
+      margin: 0 auto;
+      width: min(100vw, calc(100vh * 16 / 9));
+      width: min(100vw, calc(100dvh * 16 / 9));
+      height: auto;
+      max-width: 100%;
+      object-fit: contain;
+
+      /* Gentle, silky entrance transition */
+      opacity: 0.05;
+      transform: translate3d(0, 50px, 0) scale(0.965);
+      transition: opacity 1.4s var(--ease-lux), 
+                  transform 1.6s var(--ease-lux),
+                  filter 1.4s var(--ease-lux);
+      filter: blur(8px);
+      will-change: opacity, transform, filter;
+      border-radius: 4px;
+    }
+
+    /* Active Visible Slide State — Silky Sharp & Elevated */
+    .slide-section.is-visible .slide-img {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) scale(1);
+      filter: blur(0px);
+    }
+
+    /* Subtle Continuous Hover Lift (pointer devices only) */
+    @media (hover: hover) {
+      .slide-frame:hover .slide-img {
+        transform: translate3d(0, -4px, 0) scale(1.01);
+        transition: transform 0.6s var(--ease-lux);
+      }
+    }
+
+    /* Floating Contact Us Button with Pulsing Ambient Glow */
+    .btn-contact-floating {
+      position: fixed;
+      bottom: 36px;
+      right: 36px;
+      z-index: 999;
+      background: rgba(200, 22, 44, 0.94);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      padding: 13px 26px;
+      border-radius: 50px;
+      font-family: var(--font-main);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 10px 32px rgba(200, 22, 44, 0.4), 0 2px 10px rgba(0, 0, 0, 0.2);
+
+      /* Micro-Interactions */
+      transition: transform 0.4s var(--ease-lux),
+                  background-color 0.3s ease,
+                  box-shadow 0.4s var(--ease-lux);
+      will-change: transform;
+      animation: pulseGlow 3.5s infinite ease-in-out;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% {
+        box-shadow: 0 10px 32px rgba(200, 22, 44, 0.4), 0 2px 10px rgba(0, 0, 0, 0.2);
+      }
+      50% {
+        box-shadow: 0 14px 44px rgba(200, 22, 44, 0.65), 0 4px 14px rgba(0, 0, 0, 0.3);
+      }
+    }
+
+    .btn-contact-floating:hover {
+      background: var(--fute-red-hover);
+      transform: translate3d(0, -5px, 0) scale(1.05);
+      animation: none;
+      box-shadow: 0 16px 48px rgba(200, 22, 44, 0.6), 0 4px 14px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn-contact-floating:active {
+      transform: translate3d(0, -1px, 0) scale(0.97);
+    }
+
+    .btn-contact-icon {
+      width: 16px;
+      height: 16px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      transition: transform 0.4s var(--ease-lux);
+    }
+
+    .btn-contact-floating:hover .btn-contact-icon {
+      transform: scale(1.2) rotate(-8deg);
+    }
+
+    /* Contact Overlay Modal */
+    .contact-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(14, 14, 12, 0.85);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s var(--ease-lux);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .contact-overlay.is-active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .contact-card {
+      background: #1c1c1a;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 20px;
+      width: min(520px, 92vw);
+      padding: 40px 34px;
+      color: #ffffff;
+      position: relative;
+      transform: translate3d(0, 35px, 0) scale(0.94);
+      transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+    }
+
+    .contact-overlay.is-active .contact-card {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+
+    .btn-close-modal {
+      position: absolute;
+      top: 22px;
+      right: 22px;
+      background: rgba(255, 255, 255, 0.08);
+      border: none;
+      color: #ffffff;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 16px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-close-modal:hover {
+      background: var(--fute-red);
+      transform: scale(1.1) rotate(90deg);
+    }
+
+    .contact-brand {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      color: var(--fute-red);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .contact-title {
+      font-size: 26px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 6px;
+    }
+
+    .contact-subtitle {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.6);
+      margin-bottom: 24px;
+    }
+
+    .contact-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .contact-tile {
+      display: flex;
+      flex-direction: column;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 16px 20px;
+      border-radius: 12px;
+      text-decoration: none;
+      color: #ffffff;
+      transition: all 0.35s var(--ease-lux);
+    }
+
+    .contact-tile:hover {
+      background: rgba(200, 22, 44, 0.18);
+      border-color: var(--fute-red);
+      transform: translate3d(6px, 0, 0);
+    }
+
+    .contact-name {
+      font-weight: 600;
+      font-size: 15px;
+      color: #ffffff;
+    }
+
+    .contact-detail {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.7);
+      margin-top: 4px;
+    }
+
+    .contact-footer {
+      margin-top: 24px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.45);
+      text-align: center;
+      letter-spacing: 1.2px;
+    }
+
+    /* ==========================================================
+       Live-text slides (real HTML, responsive)
+       Mobile-first: stacked flow. Desktop (>=768px): 16:9 canvas
+       scaled with container units (1cqw = 1/100 of canvas width).
+       ========================================================== */
+    :root {
+      --font-serif: 'DejaVu Serif', Georgia, 'Times New Roman', serif;
+      --sc-cream: #f3f0e9;
+      --sc-ink: #161614;
+      --sc-red: #c8162c;
+    }
+
+    .slide-html.slide-section { padding: 0; min-height: 0; align-items: stretch; }
+    .slide-html .slide-frame { width: 100%; perspective: none; align-items: stretch; }
+
+    .slide-canvas {
+      position: relative;
+      width: 100%;
+      min-height: 0;
+      padding: 72px 24px 88px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      overflow: hidden;
+      opacity: 0.05;
+      transform: translate3d(0, 30px, 0);
+      transition: opacity 1.2s var(--ease-lux), transform 1.4s var(--ease-lux);
+    }
+    .slide-section.is-visible .slide-canvas { opacity: 1; transform: none; }
+    .theme-dark  { color: var(--sc-cream); }
+    .theme-light { color: var(--sc-ink); }
+
+    .sc-eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--sc-red); text-transform: uppercase; }
+    .sc-h1 {
+      font-family: var(--font-serif); font-weight: 700; text-transform: uppercase;
+      font-size: clamp(42px, 14vw, 76px); line-height: 0.98; letter-spacing: -0.01em;
+      overflow-wrap: anywhere;
+    }
+    .sc-h1 span { display: block; }
+    .sc-lead { font-size: 17px; line-height: 1.55; max-width: 34em; }
+    .sc-tag  { font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: var(--sc-red); text-transform: uppercase; }
+    .sc-foot {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-top: auto; padding-top: 28px;
+      font-size: 12px; font-weight: 700; letter-spacing: 0.04em;
+    }
+    .sc-rings { display: none; }
+
+    /* Slide 8: four beats */
+    .s8-grid { display: grid; grid-template-columns: 1fr; }
+    .s8-item { padding: 26px 0; border-top: 1px solid rgba(20, 20, 18, 0.16); }
+    .s8-item:last-child { border-bottom: 1px solid rgba(20, 20, 18, 0.16); }
+    .s8-title { font-family: var(--font-serif); font-weight: 700; text-transform: uppercase; font-size: clamp(28px, 9vw, 40px); line-height: 1.05; }
+    .s8-time  { margin-top: 14px; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: var(--sc-red); text-transform: uppercase; }
+    .s8-desc  { margin-top: 10px; font-size: 16px; line-height: 1.5; }
+
+    /* Slide 19: three questions */
+    .s19-steps { list-style: none; display: grid; gap: 0; }
+    .s19-step { padding: 20px 0 20px 22px; border-left: 2px solid var(--sc-red); position: relative; }
+    .s19-step + .s19-step { margin-top: 4px; }
+    .s19-step b { display: block; color: var(--sc-red); font-size: 13px; letter-spacing: 0.04em; }
+    .s19-step b em { font-style: normal; display: block; opacity: 0.85; margin-bottom: 4px; }
+    .s19-step p { margin-top: 8px; font-size: 15px; line-height: 1.5; }
+
+    /* Slide 20: four systems */
+    .s20-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+    .s20-bar { height: 4px; width: 100%; max-width: 320px; background: var(--sc-red); }
+    .s20-range { font-size: 16px; font-weight: 700; color: var(--sc-red); }
+    .s20-card { background: #c4081f; color: #fff; padding: 22px 20px; min-height: 150px; display: flex; flex-direction: column; }
+    .s20-card small { font-size: 12px; font-weight: 700; letter-spacing: 0.06em; }
+    .s20-card h3 { font-family: var(--font-serif); font-weight: 400; text-transform: uppercase; font-size: 24px; line-height: 1.08; margin-top: 14px; }
+    .s20-card p { margin-top: auto; padding-top: 18px; font-size: 14px; line-height: 1.5; opacity: 0.95; }
+
+    /* Slide 25: process timeline (vertical on mobile) */
+    .s25-steps { list-style: none; position: relative; margin-top: 8px; }
+    .s25-step { position: relative; padding: 0 0 30px 56px; }
+    .s25-step:last-child { padding-bottom: 0; }
+    .s25-step::before { content: ''; position: absolute; left: 15px; top: 32px; bottom: 0; width: 2px; background: var(--sc-red); }
+    .s25-step:last-child::before { display: none; }
+    .s25-node { position: absolute; left: 0; top: 0; width: 32px; height: 32px; border-radius: 50%; background: var(--sc-red); color: #fff; font-size: 11px; font-weight: 700; display: grid; place-items: center; }
+    .s25-step h3 { font-size: 13px; font-weight: 700; letter-spacing: 0.06em; color: var(--sc-red); text-transform: uppercase; line-height: 32px; }
+    .s25-step p { margin-top: 6px; font-size: 15px; line-height: 1.5; }
+
+    /* ==========================================================
+       .gx — generic slide layout in the PDF's 960x540 space.
+       Mobile: everything flows in DOM order.
+       Desktop: .ab elements are placed with --x/--y/--w/--h/--fs
+       expressed in PDF points, scaled by --u (= canvas width / 960).
+       ========================================================== */
+    .gx { gap: 20px; min-height: 0; }
+    .gx .gf { margin-top: 12px; }
+    .gx a { color: inherit; text-decoration: none; }
+    .gx .r  { color: var(--sc-red); }
+    .gx .cr { color: var(--sc-cream); }
+    .gx .dk { color: var(--sc-ink); }
+    .gx .gray { color: #555; }
+    .gx .eb { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--sc-red); text-transform: uppercase; }
+    .gx .hd {
+      font-family: var(--font-serif); font-weight: 700; text-transform: uppercase;
+      font-size: clamp(28px, 8.6vw, 60px); line-height: 1.02; overflow-wrap: anywhere;
+    }
+    .gx .hd + .hd { margin-top: -12px; }
+    .gx .hd br { display: none; }
+    .gx .hd.narrow { font-family: 'Archivo Narrow', 'Arial Narrow', Arial, sans-serif; font-size: clamp(38px, 12.5vw, 84px); letter-spacing: -0.01em; }
+    .gx .tx { font-size: 16px; line-height: 1.55; }
+    .gx .tx.serif { font-family: var(--font-serif); }
+    .gx .sm { font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+    .gx .ph { display: block; width: 100%; height: auto; }
+    .gx .ph.logo { width: 190px; }
+    .gx .deco { display: none; }
+    .gx .gf { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 24px; font-size: 12px; font-weight: 700; letter-spacing: 0.04em; }
+    .gx .it { font-size: 15px; line-height: 1.5; padding: 4px 0 4px 16px; border-left: 2px solid var(--sc-red); }
+    .gx .it b { display: block; color: var(--sc-red); font-size: 0.85em; letter-spacing: 0.06em; text-transform: uppercase; }
+    .gx .it p, .gx .it span { display: block; margin-top: 0.4em; }
+    .gx .it em { display: block; font-style: normal; color: var(--sc-red); font-size: 0.8em; font-weight: 700; }
+    .gx .list { display: grid; gap: 16px; }
+    .gx .list.two { grid-template-columns: 1fr 1fr; gap: 20px 16px; }
+    .gx .chips { list-style: none; display: flex; flex-wrap: wrap; gap: 10px; }
+    .gx .chip { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 8px 14px; border: 1px solid rgba(243, 240, 233, 0.25); border-radius: 999px; }
+    .gx .chip i { width: 9px; height: 9px; border-radius: 50%; background: var(--sc-red); flex: none; }
+    .gx .panel { padding: 24px 22px; }
+    .gx .panel-red  { background: #c1081f; color: #fff; }
+    .gx .panel-ink  { background: #141412; color: var(--sc-cream); }
+    .gx .panel-line { border-top: 1px solid rgba(243, 240, 233, 0.16); border-bottom: 1px solid rgba(243, 240, 233, 0.16); }
+    .gx .panel > * + * { margin-top: 14px; }
+    .gx .tag-red { display: block; background: var(--sc-red); color: #fff; padding: 10px 14px; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+    .gx .contact p { font-size: 15px; line-height: 1.4; }
+    .gx .contact .lg { font-size: 17px; }
+    .gx .quote-mark { font-family: var(--font-serif); font-size: 64px; line-height: 0.6; color: var(--sc-red); font-style: italic; }
+    .gx .quote p + p { margin-top: 1em; }
+    .gx .who { border-top: 1px solid var(--sc-red); padding-top: 18px; }
+    .gx .who .hd { font-size: clamp(30px, 9vw, 44px); }
+
+    .gx .tl6 { list-style: none; }
+    .gx .tl6 li { position: relative; padding: 0 0 26px 52px; }
+    .gx .tl6 li:last-child { padding-bottom: 0; }
+    .gx .tl6 li::before { content: ''; position: absolute; left: 15px; top: 32px; bottom: 0; width: 2px; background: var(--sc-red); }
+    .gx .tl6 li:last-child::before { display: none; }
+    .gx .tl6 .nd { position: absolute; left: 0; top: 0; width: 32px; height: 32px; border-radius: 50%; background: var(--sc-red); color: #fff; font-size: 11px; font-weight: 700; display: grid; place-items: center; }
+    .gx .tl6 b { display: block; line-height: 32px; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; }
+
+    /* Slides whose design is a coloured panel: keep it readable on phones */
+    .s28.gx { background: var(--sc-cream); color: var(--sc-ink); }
+    .s29.gx { background: #141412; }
+    .s32.gx { background: #bc1728; }
+    .s27 .ftn { color: var(--sc-cream); }
+    @media (max-width: 999px) {
+      .m-dk { color: var(--sc-ink) !important; }
+      .m-cr { color: var(--sc-cream) !important; }
+    }
+    .m-lg { font-size: clamp(24px, 7.5vw, 40px) !important; }
+
+    /* ==========================================================
+       Layout wrappers (added by JS). Phones/tablets: invisible,
+       content flows in its original order. Desktop: real columns.
+       ========================================================== */
+    .gx-row, .gx-cols, .gx-col { display: contents; }
+
+    /* Tablet portrait (768–999): same flow as phones, a bit roomier */
+    @media (min-width: 768px) and (max-width: 999px), (min-width: 1000px) and (max-aspect-ratio: 11/10) {
+      .slide-canvas { padding: 80px clamp(32px, 7vw, 72px) 96px; gap: 28px; }
+      .gx .hd { font-size: clamp(40px, 7vw, 64px); }
+      .gx .tx, .sc-lead { font-size: 19px; }
+      .gx .eb, .gx .sm, .sc-eyebrow, .sc-tag { font-size: 13px; }
+      .gx .it { font-size: 17px; }
+      .gx .list.two { grid-template-columns: repeat(3, 1fr); }
+      .gx .ph { max-width: 720px; max-height: min(62dvh, 600px); object-fit: cover; }
+    }
+
+    /* ==========================================================
+       Desktop (>= 1000px): fluid layout, readable text at any size.
+       Type scale is set once on the canvas and reused everywhere.
+       ========================================================== */
+    @media (min-width: 1000px) and (min-aspect-ratio: 11/10) {
+      .slide-html.slide-section { min-height: 100vh; min-height: 100dvh; align-items: center; }
+      .slide-html .slide-frame { align-items: center; }
+
+      .slide-canvas {
+        --pad: max(clamp(32px, 5vw, 88px), calc((100vw - 1360px) / 2));
+        --gap: clamp(28px, 4.4vh, 60px);
+        --gap-in: clamp(16px, 2.6vh, 32px);
+        --col-gap: clamp(36px, 5vw, 96px);
+        --fs-h: clamp(40px, 4.2vw, 72px);
+        --fs-body: clamp(17px, 1.25vw, 22px);
+        --fs-small: clamp(12.5px, 0.9vw, 15px);
+        --fs-item: clamp(16px, 1.12vw, 20px);
+        min-height: 100vh; min-height: 100dvh;
+        padding: clamp(56px, 9vh, 104px) var(--pad) clamp(88px, 12vh, 128px);
+        justify-content: center;
+        gap: var(--gap);
+      }
+      .slide-canvas.has-bleed { padding-block: 0; gap: 0; }
+
+      .gx-row { display: flex; flex-direction: column; gap: var(--gap-in); }
+      .gx-cols { display: grid; grid-template-columns: repeat(var(--n, 2), minmax(0, 1fr)); column-gap: var(--col-gap); align-items: center; }
+      .gx-col { display: flex; flex-direction: column; gap: var(--gap-in); min-width: 0; }
+
+      /* Full-bleed column rows (coloured panels) */
+      .gx-cols.bleed { width: 100vw; margin-inline: calc(50% - 50vw); column-gap: 0; align-items: stretch; min-height: 100vh; min-height: 100dvh; }
+      .gx-cols.bleed .gx-col { justify-content: center; padding-block: clamp(64px, 10vh, 112px); }
+      .gx-cols.bleed .gx-col:first-child { padding-left: var(--pad); padding-right: clamp(28px, 4vw, 72px); }
+      .gx-cols.bleed .gx-col:last-child { padding-right: var(--pad); padding-left: clamp(28px, 4vw, 72px); }
+
+      /* Footer sits at the bottom of the slide */
+      .gx .gf, .sc-foot {
+        position: absolute; left: var(--pad); right: var(--pad); bottom: clamp(18px, 3.2vh, 34px);
+        margin: 0; padding: 0; z-index: 2; font-size: var(--fs-small);
+      }
+
+      /* ---- Shared type scale (gx slides) ---- */
+      .gx .eb, .gx .sm, .gx .tag-red, .gx .chip { font-size: var(--fs-small); }
+      .gx .eb { letter-spacing: 0.1em; }
+      .gx .hd { font-size: var(--fs-h); line-height: 1.04; }
+      .gx .hd br { display: inline; }
+      .gx .hd + .hd { margin-top: 0; }
+      .gx .tx { font-size: var(--fs-body); line-height: 1.55; }
+      .gx .it, .gx .contact p { font-size: var(--fs-item); }
+      .gx .contact .lg { font-size: 1.1em; }
+      .gx .panel { padding: clamp(24px, 3vw, 48px); }
+      .gx .panel > * + * { margin-top: clamp(10px, 1.6vh, 18px); }
+      .gx .tag-red { padding: 0.9em 1.2em; }
+      .gx .ph { max-height: min(68dvh, 760px); object-fit: cover; }
+      .gx .ph.logo { width: clamp(200px, 17vw, 300px); max-height: none; object-fit: contain; }
+      .gx .deco.keep { display: block; height: 3px; width: 100%; }
+      .gx .quote-mark { font-size: clamp(64px, 6vw, 110px); }
+      .gx .who .hd { font-size: clamp(34px, 3.6vw, 60px); line-height: 1.15; }
+      .gx .who { padding-top: clamp(18px, 3vh, 32px); }
+      .m-lg { font-size: clamp(28px, 3.6vw, 60px) !important; }
+
+      /* Lists laid out in rows on desktop */
+      .gx .list.two { grid-template-columns: repeat(3, 1fr); gap: clamp(20px, 3vh, 36px) clamp(20px, 2.5vw, 44px); }
+      .s4 .list { grid-template-columns: repeat(5, 1fr); gap: clamp(16px, 2vw, 36px); }
+      .s7 .list { grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 2vw, 36px); }
+
+      /* Accent stripe beside photos (from the original design) */
+      .s18 .ph, .s21 .ph, .s26 .ph { box-shadow: calc(-1 * clamp(12px, 1.6vw, 26px)) 0 0 var(--sc-red); }
+      .s18 .ph { max-height: 78dvh; }
+
+      /* Horizontal journey timeline (slide 6) */
+      .gx .tl6 { position: relative; display: grid; grid-template-columns: repeat(6, 1fr); text-align: center; margin-top: clamp(8px, 2vh, 24px); }
+      .gx .tl6::before { content: ''; position: absolute; left: calc(100% / 12); right: calc(100% / 12); top: 22px; height: 3px; background: var(--sc-red); transform: translateY(-50%); }
+      .gx .tl6 li { padding: 0; }
+      .gx .tl6 li::before { display: none; }
+      .gx .tl6 .nd { position: relative; z-index: 1; width: 44px; height: 44px; margin: 0 auto; font-size: 14px; }
+      .gx .tl6 b { line-height: 1.2; margin-top: 14px; font-size: var(--fs-small); letter-spacing: 0.06em; }
+
+      /* ---- Per-slide tuning ---- */
+      .s1 .hd.narrow { font-size: clamp(60px, 9.6vw, 156px); }
+      .s27 { --fs-h: clamp(34px, 3.5vw, 60px); }
+      .s24 .panel .hd { font-size: clamp(36px, 3.6vw, 62px); }
+      .s30 .gx-cols { grid-template-columns: 2fr 1fr; align-items: start; }
+      .s28, .s29, .s32 { --fs-h: clamp(40px, 4.4vw, 76px); }
+      .s29 { --fs-h: clamp(40px, 4.6vw, 80px); }
+      .s28.gx, .s29.gx, .s32.gx { background: none; }
+      .s28.gx { color: var(--sc-cream); }
+      .s27 .ftn { color: var(--sc-ink); }
+
+      /* s27: photo on a cream half */
+      .s27 .gx-cols.bleed { grid-template-columns: 54% 46%; }
+      .s27 .gx-col:last-child { background: var(--sc-cream); }
+
+      /* s28: dark | red stripe | cream */
+      .s28 .gx-cols.bleed { grid-template-columns: 44% 56%; }
+      .s28 .gx-col:last-child { background: var(--sc-cream); border-left: clamp(16px, 2vw, 32px) solid var(--sc-red); }
+
+      /* s29: red edge | dark | red contact panel */
+      .s29 .gx-cols.bleed { grid-template-columns: 72% 28%; }
+      .s29 .gx-col:first-child { background: #141412; border-left: clamp(16px, 2.3vw, 40px) solid var(--sc-red); }
+      .s29 .gx-col:last-child { background: #c1081f; }
+      .s29 .panel { padding: 0; }
+
+      /* s32: dark block top-left, red rest, contact band below */
+      .s32 .gx-cols.r1 { grid-template-columns: 28% 72%; min-height: 64dvh; }
+      .s32 .gx-cols.r2 { grid-template-columns: 35% 65%; min-height: 36dvh; }
+      .s32 .gx-cols.bleed .gx-col:first-child { background: #141412; }
+      .s32 .gx-cols.r2 .gx-col:last-child { flex-direction: row; gap: clamp(28px, 5vw, 96px); align-items: center; }
+      .s32 .gx-cols.r2 .gx-col:last-child .contact { flex: 1; }
+
+      /* ---- Older live slides (8, 19, 20, 25) ---- */
+      .sc-eyebrow, .sc-tag { font-size: var(--fs-small); letter-spacing: 0.1em; }
+      .sc-h1 { font-size: var(--fs-h); line-height: 1.02; }
+      .sc-lead { font-size: var(--fs-body); }
+
+      .s8-grid { grid-template-columns: 1fr 1fr; column-gap: var(--col-gap); }
+      .s8-item { padding: clamp(24px, 4vh, 48px) 0; }
+      .s8-item:last-child { border-bottom: 0; }
+      .s8-item:nth-last-child(-n+2) { border-bottom: 1px solid rgba(20, 20, 18, 0.16); }
+      .s8-title { font-size: clamp(36px, 4vw, 68px); }
+      .s8-time { font-size: var(--fs-small); }
+      .s8-desc { font-size: var(--fs-body); max-width: 30em; }
+
+      .s19-viz { position: relative; display: grid; place-items: center; aspect-ratio: 1; width: min(100%, 720px); margin-inline: auto; }
+      .s19-viz .sc-rings { display: block; position: absolute; inset: 0; width: 100%; height: 100%; }
+      .s19-steps { position: relative; width: 46%; text-align: center; }
+      .s19-step { border-left: 0; padding: clamp(8px, 1.4vh, 16px) 0; }
+      .s19-step + .s19-step { margin-top: 0; }
+      .s19-step b { font-size: var(--fs-small); }
+      .s19-step b em { display: inline; margin-right: 0.5em; }
+      .s19-step p { font-size: var(--fs-small); line-height: 1.4; margin-top: 4px; }
+
+      .s20 .sc-h1 .big { font-size: 1.4em; }
+      .s20-range { font-size: var(--fs-item); }
+      .s20-bar { height: 5px; }
+      .s20-grid { grid-template-columns: 1fr 1fr; gap: clamp(14px, 1.8vw, 28px); }
+      .s20-card { padding: clamp(20px, 2vw, 32px); min-height: clamp(150px, 20vh, 240px); }
+      .s20-card small { font-size: var(--fs-small); }
+      .s20-card h3 { font-size: clamp(24px, 2.1vw, 38px); }
+      .s20-card p { font-size: var(--fs-item); }
+
+      .s25-steps { display: grid; grid-template-columns: repeat(4, 1fr); column-gap: clamp(20px, 3vw, 48px); margin-top: clamp(20px, 5vh, 56px); }
+      .s25-steps::before { content: ''; position: absolute; left: 18px; right: 0; top: 18px; height: 3px; background: var(--sc-red); transform: translateY(-50%); }
+      .s25-step { padding: clamp(52px, 7vh, 64px) 0 0; }
+      .s25-step:last-child { padding-bottom: 0; }
+      .s25-step::before { display: none; }
+      .s25-node { width: 36px; height: 36px; font-size: 12px; }
+      .s25-step h3 { font-size: var(--fs-small); line-height: 1.2; }
+      .s25-step p { font-size: var(--fs-item); }
+    }
+
+    /* Photo slides: tap/click to zoom */
+    .slide-img[data-zoom] { cursor: zoom-in; }
+    .lightbox { position: fixed; inset: 0; z-index: 3000; background: rgba(10, 10, 9, 0.96); display: none; overflow: auto; -webkit-overflow-scrolling: touch; }
+    .lightbox.is-open { display: block; }
+    .lightbox img { display: block; margin: 0 auto; width: 100vw; max-width: none; height: auto; }
+    .lightbox-close { position: fixed; top: 14px; right: 14px; z-index: 3001; width: 44px; height: 44px; border: 0; border-radius: 50%; background: rgba(255, 255, 255, 0.14); color: #fff; font-size: 18px; cursor: pointer; }
+    .lightbox-hint { position: fixed; left: 0; right: 0; bottom: 14px; text-align: center; color: rgba(255, 255, 255, 0.6); font-size: 12px; pointer-events: none; }
+    @media (min-width: 1000px) {
+      .lightbox img { width: auto; max-width: 100vw; height: 100vh; object-fit: contain; }
+      .lightbox-hint { display: none; }
+    }
+    @media (max-width: 999px) {
+      .lightbox img { width: max(100vw, 160vh); }
+    }
+
+    /* ---------- Flow layout (phones, tablets, tall windows): no forced screen-height gaps ---------- */
+    @media (max-width: 999px), (max-aspect-ratio: 11/10) {
+      .slide-section { min-height: 0; padding: 10px 0; }
+      .slide-html.slide-section { padding: 0; }
+      .slide-frame { width: 100%; }
+      .slide-img { width: 100%; border-radius: 0; filter: none; }
+    }
+
+    /* ---------- Small screens: tighter image slides + controls ---------- */
+    @media (max-width: 767px) {
+      .slide-section { min-height: 0; padding: 10px 0; }
+      .slide-html.slide-section { padding: 0; }
+      .slide-frame { width: 100%; }
+      .slide-img { width: 100%; border-radius: 0; filter: none; transition: opacity 1s var(--ease-lux), transform 1.2s var(--ease-lux); }
+      .btn-contact-floating { bottom: 16px; right: 16px; padding: 11px 18px; font-size: 13px; }
+      @media (max-width: 480px) {
+        .btn-contact-floating { width: 48px; height: 48px; padding: 0; justify-content: center; gap: 0; }
+        .btn-contact-floating span { display: none; }
+        .btn-contact-icon { width: 20px; height: 20px; }
+      }
+      .contact-overlay { padding: 14px; align-items: flex-start; overflow-y: auto; }
+      .contact-card { width: 100%; padding: 30px 22px 24px; margin: auto 0; }
+      .contact-title { font-size: 22px; }
+      .contact-tile { padding: 14px 16px; overflow-wrap: anywhere; }
+      .contact-tile:hover { transform: none; }
+    }
+
+    /* Accessibility: Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      body, .slide-section, .slide-img, .slide-canvas, .btn-contact-floating, .contact-overlay, .contact-card {
+        transition: none !important;
+        transform: none !important;
+        opacity: 1 !important;
+        filter: none !important;
+        animation: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Slide Sections Container -->
+  <main id="app">
+    <!-- Generated dynamically via JS with exact color themes -->
+  </main>
+
+  <!-- Premium Floating Contact Us Button -->
+  <button class="btn-contact-floating" id="openContactBtn" aria-label="Contact Us">
+    <svg class="btn-contact-icon" viewBox="0 0 24 24">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+    </svg>
+    <span>Contact Us</span>
+  </button>
+
+  <!-- Premium Contact Modal -->
+  <div class="contact-overlay" id="contactOverlay" aria-hidden="true">
+    <div class="contact-card">
+      <button class="btn-close-modal" id="closeContactBtn" aria-label="Close modal">✕</button>
+      <div class="contact-brand">Futé Services<sup>®</sup></div>
+      <h2 class="contact-title">Get in Touch</h2>
+      <p class="contact-subtitle">The Real Estate Buyer Experience Company — India | Singapore | UAE | Australia</p>
+
+      <div class="contact-grid">
+        <a href="mailto:Soma@futeservices.com" class="contact-tile">
+          <div class="contact-name">Soma</div>
+          <div class="contact-detail">Soma@futeservices.com</div>
+        </a>
+
+        <a href="mailto:Payel@futeservices.com" class="contact-tile">
+          <div class="contact-name">Payel — India & International</div>
+          <div class="contact-detail">Payel@futeservices.com | +91 97422 23928</div>
+          <div class="contact-detail">Sales Team: +91 7411 421 118</div>
+          <div class="contact-detail">Australia: +61 493 165 725</div>
+        </a>
+
+        <a href="mailto:amelia@futeservices.com" class="contact-tile">
+          <div class="contact-name">Amelia</div>
+          <div class="contact-detail">amelia@futeservices.com</div>
+        </a>
+      </div>
+
+      <div class="contact-footer">
+        INDIA &bull; AUSTRALIA &bull; DUBAI &bull; FUTESERVICES.COM
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const SLIDES = [
+      { id: 1, img: 'slides/s-01.jpg', bg: '#ffffff' },
+      { id: 2, img: 'slides/s-02.jpg', bg: '#141412' },
+      { id: 3, img: 'slides/s-03.jpg', bg: '#f3f0e9' },
+      { id: 4, img: 'slides/s-04.jpg', bg: '#141412' },
+      { id: 5, img: 'slides/s-05.jpg', bg: '#f3f0e9' },
+      { id: 6, img: 'slides/s-06.jpg', bg: '#131311' },
+      { id: 7, img: 'slides/s-07.jpg', bg: '#141412' },
+      { id: 8, img: 'slides/s-08.jpg', bg: '#fbf6f0' },
+      { id: 9, img: 'slides/s-09.jpg', bg: '#0e0e0c' },
+      { id: 10, img: 'slides/s-10.jpg', bg: '#97c5e6' },
+      { id: 11, img: 'slides/s-11.jpg', bg: '#12150a' },
+      { id: 12, img: 'slides/s-12.jpg', bg: '#c7dbe6' },
+      { id: 13, img: 'slides/s-13.jpg', bg: '#456c95' },
+      { id: 14, img: 'slides/s-14.jpg', bg: '#362f27' },
+      { id: 15, img: 'slides/s-15.jpg', bg: '#ffe9d1' },
+      { id: 16, img: 'slides/s-16.jpg', bg: '#86483d' },
+      { id: 17, img: 'slides/s-17.jpg', bg: '#a8977d' },
+      { id: 18, img: 'slides/s-18.jpg', bg: '#181715' },
+      { id: 19, img: 'slides/s-19.jpg', bg: '#f3f0e9' },
+      { id: 20, img: 'slides/s-20.jpg', bg: '#141412' },
+      { id: 21, img: 'slides/s-21.jpg', bg: '#141412' },
+      { id: 22, img: 'slides/s-22.jpg', bg: '#f3f0e9' },
+      { id: 23, img: 'slides/s-23.jpg', bg: '#141412' },
+      { id: 24, img: 'slides/s-24.jpg', bg: '#f3f0e9' },
+      { id: 25, img: 'slides/s-25.jpg', bg: '#141412' },
+      { id: 26, img: 'slides/s-26.jpg', bg: '#141412' },
+      { id: 27, img: 'slides/s-27.jpg', bg: '#141412' },
+      { id: 28, img: 'slides/s-28.jpg', bg: '#141412' },
+      { id: 29, img: 'slides/s-29.jpg', bg: '#c8162c' },
+      { id: 30, img: 'slides/s-30.jpg', bg: '#141412' },
+      { id: 31, img: 'slides/s-31.jpg', bg: '#f3f0e9' },
+      { id: 32, img: 'slides/s-32.jpg', bg: '#bc1728' }
+    ];
+
+    // Slides rebuilt as live, responsive HTML (keyed by slide id).
+    // Any slide not listed here falls back to its image.
+    const HTML_SLIDES = {
+      8: {
+        theme: 'theme-light',
+        html: `
+          <div class="s8-grid">
+            <article class="s8-item"><h2 class="s8-title">Anticipation</h2><div class="s8-time">0–8 sec</div><p class="s8-desc">An active morning ritual reveals a character’s desire for a different pace.</p></article>
+            <article class="s8-item"><h2 class="s8-title">Arrival</h2><div class="s8-time">8–18 sec</div><p class="s8-desc">Move through the project’s arrival route; architecture enters through action.</p></article>
+            <article class="s8-item"><h2 class="s8-title">Belonging</h2><div class="s8-time">18–47 sec</div><p class="s8-desc">Shared life and a quieter personal moment make the place feel lived in.</p></article>
+            <article class="s8-item"><h2 class="s8-title">Memory</h2><div class="s8-time">47–60 sec</div><p class="s8-desc">Return to the opening gesture in an evening setting; end on the life she chooses.</p></article>
+          </div>
+          <div class="sc-tag">Character / Space / Light / Movement / Memory</div>
+          <div class="sc-foot"><span>FUTÉ 2.0</span><span>08</span></div>`
+      },
+      19: {
+        theme: 'theme-light',
+        html: `
+          <div class="sc-eyebrow">Interactive Decision System</div>
+          <h2 class="sc-h1"><span>Your</span><span>Next</span><span>Question.</span></h2>
+          <p class="sc-lead">An AI guide helps buyers explore the project, understand their options and take the next step.</p>
+          <div class="s19-viz"><svg class="sc-rings" viewBox="1030 140 700 700" aria-hidden="true">
+            <circle cx="1380" cy="490" r="330" fill="none" stroke="#c8162c" stroke-width="3"/>
+            <circle cx="1380" cy="490" r="275" fill="none" stroke="#d3ccc2" stroke-width="1.5"/>
+            <circle cx="1380" cy="490" r="220" fill="none" stroke="#c8162c" stroke-width="3"/>
+          </svg><ol class="s19-steps">
+            <li class="s19-step"><b><em>01</em>WHY THIS PLACE?</b><p>Start with the life, location and point of view.</p></li>
+            <li class="s19-step"><b><em>02</em>WHAT SUITS ME?</b><p>Move through approved spaces, plans and options.</p></li>
+            <li class="s19-step"><b><em>03</em>WHAT NEXT?</b><p>Prepare the next useful sales conversation.</p></li>
+          </ol></div>
+          <div class="sc-tag">AI-guided project experience.</div>
+          <div class="sc-foot"><span>FUTÉ 2.0</span><span>19</span></div>`
+      },
+      20: {
+        theme: 'theme-dark',
+        html: `
+          <div class="sc-eyebrow">Four Commercial Systems</div>
+          <h2 class="sc-h1"><span class="big">Four</span><span>Systems</span></h2>
+          <div class="s20-range">01—04</div>
+          <div class="s20-bar"></div>
+          <div class="s20-grid">
+            <article class="s20-card"><small>01</small><h3>Launch Clarity</h3><p>Align the proposition, Story DNA, messaging and launch-content direction.</p></article>
+            <article class="s20-card"><small>02</small><h3>Buyer Story</h3><p>Connect narrative, CGI, film and lifestyle content.</p></article>
+            <article class="s20-card"><small>03</small><h3>Interactive Decision</h3><p>Organise project information into a guided experience.</p></article>
+            <article class="s20-card"><small>04</small><h3>Portfolio Experience</h3><p>Create consistent structure across projects and assets.</p></article>
+          </div>
+          <div class="sc-foot"><span>FUTÉ 2.0</span><span>20</span></div>`
+      },
+      25: {
+        theme: 'theme-dark',
+        html: `
+          <div class="sc-eyebrow">One approved vision / carried through delivery</div>
+          <h2 class="sc-h1"><span>How Teams</span><span>Align.</span></h2>
+          <p class="sc-lead">Leadership, design, marketing and sales. One approved project story, centred on the buyer.</p>
+          <ol class="s25-steps">
+            <li class="s25-step"><span class="s25-node">01</span><h3>Inputs</h3><p>Project brief, plans, model, brand assets and a named approval owner.</p></li>
+            <li class="s25-step"><span class="s25-node">02</span><h3>Direction</h3><p>Story DNA, visual direction, narrative treatment and sequence.</p></li>
+            <li class="s25-step"><span class="s25-node">03</span><h3>Production</h3><p>Approved imagery, film, interactive modules and review.</p></li>
+            <li class="s25-step"><span class="s25-node">04</span><h3>Handover</h3><p>Quality control, final files, rights record and sales-team orientation.</p></li>
+          </ol>
+          <div class="sc-foot"><span>FUTÉ 2.0</span><span>25</span></div>`
+      }
+    };
+
+    // ---- Slides laid out with the generic .gx system (PDF 960x540 coordinates) ----
+    const S = o => Object.entries(o).map(([k, v]) => `--${k}:${v}`).join(';');
+    const ft = (n, o = {}) => `<div class="ab gf ${o.cls || ''}" style="${S({ x: o.x ?? 60, y: o.y ?? 507, w: o.w ?? 840, fs: 6.5 })}"><span>${o.brand === false ? '' : 'FUTÉ 2.0'}</span><span class="gn ${o.ncls || ''}">${n}</span></div>`;
+    const ph = (src, x, y, w, h, alt = 'Project visual') => `<img class="ab ph" src="slides/photos/${src}.jpg" alt="${alt}" loading="lazy" style="${S({ x, y, w, h })}">`;
+    const deco = (x, y, w, h, css) => `<div class="ab deco" aria-hidden="true" style="${S({ x, y, w, h })};${css}"></div>`;
+    const eb = (t, x, y, o = {}) => `<div class="ab eb ${o.cls || ''}" style="${S({ x, y, w: o.w ?? 600, fs: o.fs ?? 6.5 })}">${t}</div>`;
+
+    Object.assign(HTML_SLIDES, {
+      1: { theme: 'theme-light', gx: true, html: `
+        <img class="ab ph logo" src="slides/photos/logo.jpg" alt="Futé Services — Futuristic Unique Trendy Exceptional" style="${S({ x: 46, y: 46, w: 235, h: 75 })}">
+        <p class="ab tx m-lg" style="${S({ x: 46, y: 241, w: 600, fs: 44, lh: 1.1 })}">The Real Estate</p>
+        <h1 class="ab hd narrow r" style="${S({ x: 44, y: 301, w: 900, fs: 92, lh: 1 })}">Buyer Experience</h1>
+        <p class="ab tx m-lg" style="${S({ x: 46, y: 395, w: 600, fs: 40, lh: 1.1 })}">Company</p>
+        <p class="ab tx gray" style="${S({ x: 48, y: 468, w: 600, fs: 15, lh: 1.3 })}">One vision. Every experience. Aligned.</p>
+        <span class="ab tx gray" style="${S({ x: 878, y: 514, w: 32, fs: 6 })};text-align:right">01</span>` },
+
+      2: { theme: 'theme-dark', gx: true, html: `
+        ${deco(60, 135, 8, 320, 'background:#c8162c')}
+        ${eb('FUTÉ 2.0 / The Real Estate Buyer Experience Company', 60, 32, { fs: 6 })}
+        <h2 class="ab hd cr" style="${S({ x: 100, y: 88, w: 400, fs: 60, lh: 1.17 })}">One<br> Vision.</h2>
+        <h2 class="ab hd cr" style="${S({ x: 490, y: 105, w: 440, fs: 45, lh: 1.24 })}">Every<br> Experience.<br> <span class="r">Aligned.</span></h2>
+        <ul class="chips">
+          <li class="ab chip" style="${S({ x: 760, y: 140 })}"><i></i>Strategy</li>
+          <li class="ab chip" style="${S({ x: 815, y: 215 })}"><i></i>Story</li>
+          <li class="ab chip" style="${S({ x: 765, y: 291 })}"><i></i>Imagery</li>
+          <li class="ab chip" style="${S({ x: 850, y: 361 })}"><i></i>Technology</li>
+          <li class="ab chip" style="${S({ x: 718, y: 407 })}"><i></i>Delivery</li>
+        </ul>
+        <p class="ab tx serif" style="${S({ x: 100, y: 386, w: 380, fs: 17, lh: 1.35 })}">Every vision, story and sales experience—aligned around the buyer.</p>
+        <p class="ab sm r" style="${S({ x: 100, y: 460, w: 500, fs: 5.5 })}">17 Years / India · Singapore · UAE · Australia</p>
+        ${ft('02')}` },
+
+      3: { theme: 'theme-light', gx: true, html: `
+        ${eb('17 years of making the unbuilt feel real', 60, 33, { fs: 6 })}
+        <h2 class="ab hd" style="${S({ x: 60, y: 90, w: 380, fs: 45, lh: 0.84 })}">A Practice<br> Shaped<br> Across<br> Places.</h2>
+        ${eb('Project markets / India · Singapore · UAE · Australia', 440, 60, { fs: 5.5 })}
+        ${ph('p03', 440, 100, 495, 278, 'Waterfront towers and promenade')}
+        <div class="list two">
+          <div class="ab it" style="${S({ x: 60, y: 390, w: 130, fs: 8 })}"><b style="font-size:.75em">2009</b><span>Bengaluru</span></div>
+          <div class="ab it" style="${S({ x: 205, y: 390, w: 130, fs: 8 })}"><b style="font-size:.75em">2014</b><span>Across India</span></div>
+          <div class="ab it" style="${S({ x: 350, y: 390, w: 130, fs: 8 })}"><b style="font-size:.75em">2016</b><span>Singapore</span></div>
+          <div class="ab it" style="${S({ x: 60, y: 450, w: 130, fs: 8 })}"><b style="font-size:.75em">2017</b><span>UAE</span></div>
+          <div class="ab it" style="${S({ x: 205, y: 450, w: 130, fs: 8 })}"><b style="font-size:.75em">2023</b><span>Australia</span></div>
+          <div class="ab it" style="${S({ x: 350, y: 450, w: 130, fs: 8 })}"><b style="font-size:.75em">2026</b><span>Futé 2.0</span></div>
+        </div>
+        ${ft('03')}` },
+
+      4: { theme: 'theme-dark', gx: true, html: `
+        <div class="ab eb" style="${S({ x: 58, y: 32, w: 400, fs: 6.5 })};text-transform:none">Five connected disciplines.</div>
+        <h2 class="ab hd cr" style="${S({ x: 60, y: 113, w: 420, fs: 48, lh: 1.1 })}">The Buyer<br> Stays At<br> <span class="r">The<br> Centre.</span></h2>
+        ${ph('p04', 490, 130, 410, 231, 'Landscaped arrival street at dusk')}
+        ${deco(60, 394, 840, 3, 'background:#c8162c')}
+        <div class="list">
+          <div class="ab it" style="${S({ x: 60, y: 425, w: 150, fs: 6.3 })}"><b>Strategy</b><p>Define what matters to the buyer.</p></div>
+          <div class="ab it" style="${S({ x: 228, y: 425, w: 150, fs: 6.3 })}"><b>Story</b><p>Give the project human meaning.</p></div>
+          <div class="ab it" style="${S({ x: 396, y: 425, w: 150, fs: 6.3 })}"><b>Imagery</b><p>Make the place tangible through craft.</p></div>
+          <div class="ab it" style="${S({ x: 564, y: 425, w: 150, fs: 6.3 })}"><b>Technology</b><p>Make project information explorable.</p></div>
+          <div class="ab it" style="${S({ x: 732, y: 425, w: 150, fs: 6.3 })}"><b>Delivery</b><p>Carry one vision through every output.</p></div>
+        </div>
+        ${ft('04')}` },
+
+      5: { theme: 'theme-light', gx: true, html: `
+        ${eb('The human idea', 60, 32, { fs: 6 })}
+        <h2 class="ab hd" style="${S({ x: 60, y: 79, w: 420, fs: 56, lh: 1.04 })}">A Place<br> Becomes<br> Personal</h2>
+        <h2 class="ab hd r" style="${S({ x: 60, y: 266, w: 420, fs: 45, lh: 1.02 })}">Through<br> Life.</h2>
+        <p class="ab tx" style="${S({ x: 58, y: 370, w: 410, fs: 11.5, lh: 1.26 })}">We begin with the life people imagine in a place. We connect strategy, story, imagery and technology to make that vision tangible.</p>
+        ${ph('p05', 490, 139, 410, 231, 'Landscaped terrace lounge')}
+        ${deco(490, 391, 410, 1, 'background:#c8162c')}
+        <p class="ab tx" style="${S({ x: 488, y: 419, w: 210, fs: 9.5, lh: 1.25 })}">A shared emotional thread guides every buyer experience.</p>
+        <p class="ab sm r" style="${S({ x: 60, y: 460, w: 500, fs: 5.5 })}">Light / Material / Movement / Memory</p>
+        ${ft('05', { w: 840 })}` },
+
+      6: { theme: 'theme-dark', gx: true, html: `
+        ${eb('The connected buyer journey', 64, 33, { fs: 6 })}
+        <h2 class="ab hd cr" style="${S({ x: 64, y: 88, w: 380, fs: 45, lh: 0.87 })}">From A<br> Feeling<br> To A</h2>
+        <h2 class="ab hd r" style="${S({ x: 64, y: 250, w: 380, fs: 45, lh: 1 })}">Decision.</h2>
+        ${deco(64, 324, 326, 2, 'background:#c8162c')}
+        <p class="ab tx" style="${S({ x: 64, y: 350, w: 230, fs: 14, lh: 1.2 })}">Six stages. One connected buyer experience.</p>
+        <ol class="ab tl6" style="${S({ x: 425, y: 264, w: 480, fs: 5.5 })}">
+          <li><span class="nd">01</span><b>Discover</b></li><li><span class="nd">02</span><b>Understand</b></li>
+          <li><span class="nd">03</span><b>Believe</b></li><li><span class="nd">04</span><b>Explore</b></li>
+          <li><span class="nd">05</span><b>Compare</b></li><li><span class="nd">06</span><b>Decide</b></li>
+        </ol>
+        ${ft('06', { x: 64, w: 836 })}` },
+
+      7: { theme: 'theme-dark', gx: true, html: `
+        ${eb('Buyer story system / Lifestyle film', 60, 32, { fs: 6 })}
+        <h2 class="ab hd cr" style="${S({ x: 60, y: 91, w: 360, fs: 63, lh: 1 })}">Life,</h2>
+        <h2 class="ab hd cr" style="${S({ x: 60, y: 169, w: 380, fs: 55, lh: 1.07 })}">In Every<br> <span class="r">Frame.</span></h2>
+        <p class="ab tx" style="${S({ x: 60, y: 333, w: 320, fs: 11.5, lh: 1.3 })}">A lifestyle film begins with a character, then follows the moments where architecture becomes part of that person’s day.</p>
+        ${ph('p07', 440, 96, 460, 259, 'Restaurant interior with guests')}
+        <div class="list">
+          <div class="ab it" style="${S({ x: 440, y: 428, w: 140, fs: 6.5 })}"><em>01</em><b>Anticipation</b><span>The life they imagine.</span></div>
+          <div class="ab it" style="${S({ x: 595, y: 428, w: 140, fs: 6.5 })}"><em>02</em><b>Arrival</b><span>A place becoming possible.</span></div>
+          <div class="ab it" style="${S({ x: 755, y: 428, w: 140, fs: 6.5 })}"><em>03</em><b>Belonging</b><span>A memory in the making.</span></div>
+        </div>
+        ${ft('07')}` },
+
+      18: { theme: 'theme-dark', gx: true, html: `
+        ${eb('AI-supported creative production', 48, 34, { fs: 6 })}
+        ${deco(465, 0, 18, 540, 'background:#c8162c')}
+        <h2 class="ab hd cr" style="${S({ x: 48, y: 99, w: 430, fs: 34, lh: 1.3 })}">The Character<br> Gives Us<br> Someone<br> To Follow.</h2>
+        ${ph('p18', 512, 0, 448, 540, 'Rooftop terrace dining at night')}
+        <p class="ab tx" style="${S({ x: 48, y: 358, w: 410, fs: 10, lh: 1.25 })}">AI supports character creation and creative production. The story unfolds from the buyer’s perspective.</p>
+        <p class="ab sm r" style="${S({ x: 48, y: 445, w: 410, fs: 5 })}">Character / Wardrobe / Light / Camera / Continuity</p>
+        ${ft('18', { x: 48, w: 880, ncls: 'cr' })}` },
+
+      21: { theme: 'theme-dark', gx: true, html: `
+        ${eb('01 / Launch clarity system', 60, 32, { fs: 6 })}
+        ${deco(404, 0, 68, 540, 'background:#c8162c')}
+        <h2 class="ab hd cr" style="${S({ x: 60, y: 113, w: 420, fs: 55, lh: 1.16 })}">Clarity<br> Before<br> Content.</h2>
+        ${ph('p21', 474, 144, 456, 270, 'Residential towers and green boulevard')}
+        <p class="ab tx" style="${S({ x: 60, y: 332, w: 300, fs: 11.5, lh: 1.28 })}">Align the project’s positioning, Story DNA and launch experience before content production begins.</p>
+        <p class="ab sm r" style="${S({ x: 60, y: 459, w: 400, fs: 5 })}">Buyer definition / Messaging / Visual direction / Sequencing</p>
+        ${deco(58, 486, 332, 11, 'background:#f3f0e9')}
+        ${ft('21', { w: 860 })}` },
+
+      22: { theme: 'theme-light', gx: true, html: `
+        ${eb('02 / Buyer story system', 590, 32, { fs: 5.5 })}
+        <h2 class="ab hd" style="${S({ x: 590, y: 103, w: 340, fs: 45, lh: 1.3 })}">From<br> Project<br> To Belief</h2>
+        ${ph('p22', 40, 133, 499, 281, 'Grand restaurant interior')}
+        <p class="ab tx" style="${S({ x: 590, y: 330, w: 280, fs: 10.5, lh: 1.3 })}">Turn an unbuilt project into a coherent story buyers can understand, feel and remember.</p>
+        <p class="ab tag-red" style="${S({ x: 590, y: 426, w: 262, h: 36, fs: 5, lh: 1.25 })}">Narrative / CGI / Film<br> Masterplan / Human moments</p>
+        ${ft('22', { w: 866 })}` },
+
+      23: { theme: 'theme-dark', gx: true, html: `
+        ${eb('03 / Interactive decision system', 60, 32, { fs: 6 })}
+        <h2 class="ab hd cr" style="${S({ x: 60, y: 108, w: 420, fs: 45, lh: 1.2 })}">Explore<br> Without<br> <span class="r">The Noise.</span></h2>
+        <p class="ab tx" style="${S({ x: 60, y: 366, w: 340, fs: 10.5, lh: 1.3 })}">Help buyers explore and compare approved project information through connected interactive experiences.</p>
+        ${eb('The buyer path', 565, 80, { fs: 5 })}
+        <div class="list">
+          <div class="ab it" style="${S({ x: 600, y: 105, w: 300, fs: 7 })}"><em>01</em><b style="color:inherit">Location</b><span style="opacity:.6">Begin with context.</span></div>
+          <div class="ab it" style="${S({ x: 600, y: 185, w: 300, fs: 7 })}"><em>02</em><b style="color:inherit">Spaces</b><span style="opacity:.6">Move into what matters.</span></div>
+          <div class="ab it" style="${S({ x: 600, y: 265, w: 300, fs: 7 })}"><em>03</em><b style="color:inherit">Options</b><span style="opacity:.6">Compare with clarity.</span></div>
+          <div class="ab it" style="${S({ x: 600, y: 345, w: 300, fs: 7 })}"><em>04</em><b style="color:inherit">Next step</b><span style="opacity:.6">Make the sales conversation useful.</span></div>
+        </div>
+        ${ft('23', { w: 860 })}` },
+
+      24: { theme: 'theme-light', gx: true, html: `
+        ${eb('04 / Portfolio experience system', 60, 32, { fs: 6 })}
+        ${ph('p24', 60, 122, 486, 284, 'Rooftop terrace dining at night')}
+        <div class="ab panel panel-ink" style="${S({ x: 548, y: 60, w: 352, h: 420 })};display:flex;flex-direction:column">
+          <h2 class="hd cr" style="${S({ fs: 42, lh: 1.15 })}"><span style="font-size:1.24em">One</span><br> Portfolio.<br> Many ways<br> <span class="r" style="font-size:1.05em">In.</span></h2>
+          <div class="pg" style="margin-top:auto;padding-top:20px">
+            <p class="tx" style="${S({ fs: 9, lh: 1.35 })}">Discovery, filtering, approved assets and a standard project-information template.</p>
+          </div>
+        </div>
+        <p class="ab tx" style="${S({ x: 58, y: 464, w: 480, fs: 9.5, lh: 1.2 })}">Create a connected experience across multiple projects, markets and assets.</p>
+        ${ft('24', { w: 866 })}` },
+
+      26: { theme: 'theme-dark', gx: true, html: `
+        ${eb('A voice people recognise', 60, 32, { fs: 6 })}
+        ${deco(440, 0, 30, 540, 'background:#c8162c')}
+        <h2 class="ab hd cr" style="${S({ x: 60, y: 101, w: 470, fs: 56, lh: 1.2 })}">Begin<br> With The<br> <span class="r">Person.</span></h2>
+        ${ph('p26', 510, 71, 389, 219, 'Grand lobby with arched galleries')}
+        <div class="ab panel panel-line" style="${S({ x: 500, y: 343, w: 400, h: 157 })}">
+          <p class="sm r" style="${S({ fs: 7, mt: 17 })}">One story, in every experience.</p>
+          <p class="tx" style="${S({ fs: 10.5, lh: 1.2, mt: 26 })}">Create a clear buyer journey across strategy, imagery and interactive touchpoints.</p>
+          <p class="sm" style="${S({ fs: 7, mt: 30 })};text-transform:none">One vision. Every experience. Aligned.</p>
+        </div>
+        ${ft('26', { w: 866 })}` },
+
+      27: { theme: 'theme-dark', gx: true, html: `
+        ${eb('FUTÉ 2.0 / Global perspective', 60, 32, { fs: 6 })}
+        ${deco(498, 0, 462, 540, 'background:#f3f0e9')}
+        <h2 class="ab hd cr" style="${S({ x: 60, y: 106, w: 440, fs: 44, lh: 1.3 })}">A World<br> Of<br> Different<br> Perspectives.</h2>
+        ${ph('p27', 520, 189, 400, 225, 'Rooftop infinity pool')}
+        <p class="ab tx serif" style="${S({ x: 60, y: 378, w: 330, fs: 12.5, lh: 1.7 })}">A distinctly local project story, held to an international standard of experience.</p>
+        ${deco(60, 457, 320, 28, 'border:calc(9 * var(--u)) solid #c8162c;box-sizing:border-box')}
+        ${ft('27', { w: 866, ncls: 'ftn' })}` },
+
+      28: { theme: 'theme-dark', gx: true, html: `
+        ${eb('The client and the buyer', 40, 62, { fs: 6.5, cls: 'cr m-dk' })}
+        ${deco(400, 0, 28, 540, 'background:#c8162c')}
+        ${deco(428, 0, 532, 540, 'background:#f3f0e9')}
+        <h2 class="ab hd dk" style="${S({ x: 480, y: 100, w: 470, fs: 65, lh: 1.05 })}">One<br> Coherent<br> Story.</h2>
+        ${ph('p28', 40, 212, 320, 180, 'Restaurant interior with sculpted ceiling')}
+        <p class="ab tag-red" style="${S({ x: 480, y: 326, w: 330, h: 23, fs: 6.5 })};display:flex;align-items:center">The developer is Futé’s client.</p>
+        <p class="ab tx serif dk" style="${S({ x: 480, y: 366, w: 340, fs: 16.5, lh: 1.27 })}">The property buyer is the developer’s customer. Every output must serve the developer’s communication needs and the buyer’s understanding.</p>
+        <p class="ab sm r" style="${S({ x: 480, y: 475, w: 440, fs: 6.5 })}">Strategy / Story / Imagery / Technology / Delivery</p>
+        ${ft('28', { x: 40, w: 886, brand: false, ncls: 'dk' })}` },
+
+      29: { theme: 'theme-dark', gx: true, html: `
+        ${deco(0, 0, 22, 540, 'background:#c8162c')}
+        ${deco(22, 0, 698, 540, 'background:#141412')}
+        ${eb('Start with the next buyer question', 60, 32, { fs: 7 })}
+        <h2 class="ab hd cr" style="${S({ x: 60, y: 98, w: 650, fs: 58, lh: 1 })}">What Should<br> Your Buyer<br> Understand,<br> Feel And<br> <span class="r">Explore?</span></h2>
+        <p class="ab tx" style="${S({ x: 58, y: 420, w: 640, fs: 12, lh: 1.1 })}">Start with what your buyers most need to understand: the location, the lifestyle, the plan or the differences between options.</p>
+        <div class="ab panel panel-red contact" style="${S({ x: 720, y: 0, w: 240, h: 540, fs: 9.5 })}">
+          <p class="sm" style="${S({ fs: 8, mt: 98 })}">Contact</p>
+          <p class="lg" style="${S({ fs: 11.5, mt: 22 })}"><a href="mailto:Soma@futeservices.com">Soma@futeservices.com</a></p>
+          <p class="lg" style="${S({ fs: 11.5, mt: 15 })}"><a href="mailto:Payel@futeservices.com">Payel@futeservices.com</a></p>
+          <p style="${S({ fs: 9.5, mt: 14 })}">Payel — India &nbsp;<a href="tel:+919742223928">+91 97422 23928</a></p>
+          <p style="${S({ fs: 9.5, mt: 10 })}">Sales Team &nbsp;<a href="tel:+917411421118">+91 7411 421 118</a></p>
+          <p style="${S({ fs: 9.5, mt: 15 })}">Payel — Australia</p>
+          <p class="lg" style="${S({ fs: 11, mt: 6 })}"><a href="tel:+61493165725">+61 493 165 725</a></p>
+          <p style="${S({ fs: 9.5, mt: 13 })}">Amelia</p>
+          <p class="lg" style="${S({ fs: 11.5, mt: 7 })}"><a href="mailto:amelia@futeservices.com">amelia@futeservices.com</a></p>
+          <p style="${S({ fs: 9.5, mt: 22 })}">INDIA &nbsp;|&nbsp; AUSTRALIA &nbsp;|&nbsp; DUBAI</p>
+        </div>
+        ${ft('29', { w: 866 })}` },
+
+      30: { theme: 'theme-dark', gx: true, html: `
+        ${eb('Client testimonial', 60, 32, { fs: 6 })}
+        <div class="ab quote-mark" style="${S({ x: 60, y: 62, w: 40 })}" aria-hidden="true">“</div>
+        ${deco(90, 68, 810, 1, 'background:#c8162c')}
+        <blockquote class="ab quote tx" style="${S({ x: 105, y: 124, w: 580, fs: 11.5, lh: 1.65 })}">
+          <p>Dear Fute Team,</p>
+          <p>I am glad to inform you that all serviced apartments at Hiranandani Sands, Alibaug has been sold out in 1 day i.e. Saturday and that too in record time. So would like to congratulate all of you for your unwavering support and timely delivery. The entire presentation with walkthroughs made the pitch very strong. The brochure with static renders has also come out very nice. Overall very good work.</p>
+          <p>So once again kudos and congrats to each one of us for making it a grand success once again.</p>
+        </blockquote>
+        <div class="ab who" style="${S({ x: 710, y: 152, w: 215 })}">
+          <h2 class="hd cr">Sumon<br> <span class="r">Das.</span></h2>
+          <p class="sm" style="${S({ fs: 5.5, mt: 12 })}">Marketing Head</p>
+        </div>
+        ${deco(710, 304, 215, 1, 'background:#c8162c')}
+        ${ft('30', { w: 866 })}` },
+
+      32: { theme: 'theme-dark', gx: true, html: `
+        ${deco(0, 0, 255, 395, 'background:#141412')}
+        ${deco(0, 395, 340, 145, 'background:#141412')}
+        ${deco(62, 394, 838, 1, 'background:rgba(243,240,233,.5)')}
+        ${eb('FUTÉ 2.0', 48, 36, { fs: 5.5, cls: 'm-cr' })}
+        <h2 class="ab hd cr" style="${S({ x: 48, y: 83, w: 210, fs: 34, lh: 1.47 })}">One<br> Vision.</h2>
+        <h2 class="ab hd cr" style="${S({ x: 308, y: 82, w: 620, fs: 34, lh: 1.47 })}">Every<br> Experience.<br> Aligned.</h2>
+        <p class="ab sm cr" style="${S({ x: 62, y: 419, w: 270, fs: 5.5 })}">The Real Estate Buyer Experience Company</p>
+        <p class="ab tx cr" style="${S({ x: 62, y: 458, w: 270, fs: 8 })}"><a href="https://futeservices.com">futeservices.com</a></p>
+        <div class="ab contact cr" style="${S({ x: 410, y: 417, w: 250, fs: 7.5 })}">
+          <p><a href="mailto:Soma@futeservices.com">Soma@futeservices.com</a></p>
+          <p style="${S({ mt: 10 })}"><a href="mailto:Payel@futeservices.com">Payel@futeservices.com</a></p>
+          <p style="${S({ fs: 6, mt: 7 })}">Payel — India &nbsp;<a href="tel:+919742223928">+91 97422 23928</a></p>
+        </div>
+        <div class="ab contact cr" style="${S({ x: 680, y: 417, w: 260, fs: 7.5 })}">
+          <p><a href="mailto:amelia@futeservices.com">amelia@futeservices.com</a></p>
+          <p style="${S({ fs: 6, mt: 10 })}">Payel — Australia &nbsp;<a href="tel:+61493165725">+61 493 165 725</a></p>
+        </div>
+        ${ft('32', { x: 62, w: 838 })}` }
+    });
+
+    // Column layout per slide (indexes = position of each child in the slide markup).
+    // {i:[..]} = stacked row, {c:[[..],[..]]} = columns. Anything unlisted stays hidden/decorative.
+    const LAYOUT = {
+      2:  { rows: [{ i: [1] }, { c: [[2, 5, 6], [3, 4]] }] },
+      3:  { rows: [{ i: [0] }, { c: [[1, 4], [2, 3]] }] },
+      4:  { rows: [{ i: [0] }, { c: [[1], [2]] }, { i: [3, 4] }], keep: [3] },
+      5:  { rows: [{ i: [0] }, { c: [[1, 2, 3, 7], [4, 6]] }] },
+      6:  { rows: [{ i: [0] }, { i: [1, 2, 4] }, { i: [5] }] },
+      7:  { rows: [{ i: [0] }, { c: [[1, 2, 3], [4]] }, { i: [5] }] },
+      18: { rows: [{ c: [[0, 2, 4, 5], [3]] }] },
+      19: { rows: [{ c: [[0, 1, 2, 4], [3]] }] },
+      20: { rows: [{ i: [0] }, { c: [[1, 2, 3], [4]] }] },
+      21: { rows: [{ c: [[0, 2, 4, 5], [3]] }] },
+      22: { rows: [{ c: [[2], [0, 1, 3, 4]] }] },
+      23: { rows: [{ c: [[0, 1, 2], [3, 4]] }] },
+      24: { rows: [{ i: [0] }, { c: [[1, 3], [2]] }] },
+      26: { rows: [{ c: [[0, 2], [3, 4]] }] },
+      27: { rows: [{ c: [[0, 2, 4], [3]], cls: 'bleed' }] },
+      28: { rows: [{ c: [[0, 4], [3, 5, 6, 7]], cls: 'bleed' }] },
+      29: { rows: [{ c: [[2, 3, 4], [5]], cls: 'bleed' }] },
+      30: { rows: [{ i: [0] }, { c: [[1, 3], [4]] }] },
+      32: { rows: [{ c: [[3, 4], [5]], cls: 'bleed r1' }, { c: [[6, 7], [8, 9]], cls: 'bleed r2' }] }
+    };
+
+    function arrange(canvas, cfg) {
+      const kids = [...canvas.children];
+      kids.forEach((k, i) => { k.style.order = i; });          // phones keep the original reading order
+      const foot = kids.find(k => k.matches('.gf, .sc-foot'));
+      if (foot) foot.style.order = 999;
+      (cfg.keep || []).forEach(i => kids[i].classList.add('keep'));
+      const frag = document.createDocumentFragment();
+      cfg.rows.forEach(row => {
+        const w = document.createElement('div');
+        if (row.c) {
+          w.className = 'gx-cols ' + (row.cls || '');
+          w.style.setProperty('--n', row.c.length);
+          row.c.forEach(ix => {
+            const col = document.createElement('div');
+            col.className = 'gx-col';
+            ix.forEach(i => col.appendChild(kids[i]));
+            w.appendChild(col);
+          });
+          if (/bleed/.test(row.cls || '')) canvas.classList.add('has-bleed');
+        } else {
+          w.className = 'gx-row';
+          row.i.forEach(i => w.appendChild(kids[i]));
+        }
+        frag.appendChild(w);
+      });
+      canvas.insertBefore(frag, foot || null);
+    }
+
+    // Photo slides: tap/click to zoom
+    const lightbox = document.createElement('div');
+    lightbox.className = 'lightbox';
+    lightbox.innerHTML = '<button class="lightbox-close" aria-label="Close">✕</button><img alt=""><div class="lightbox-hint">Swipe to pan · tap to close</div>';
+    document.body.appendChild(lightbox);
+    const lbImg = lightbox.querySelector('img');
+    const closeLightbox = () => { lightbox.classList.remove('is-open'); document.body.style.overflow = ''; };
+    const openLightbox = img => { lbImg.src = img.src; lbImg.alt = img.alt; lightbox.classList.add('is-open'); document.body.style.overflow = 'hidden'; lightbox.scrollTo(0, 0); };
+    lightbox.addEventListener('click', closeLightbox);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+    const app = document.getElementById('app');
+
+    // Build slide sections with exact colors
+    SLIDES.forEach((slide, index) => {
+      const section = document.createElement('section');
+      section.className = 'slide-section';
+      section.style.backgroundColor = slide.bg;
+      section.dataset.bg = slide.bg;
+
+      const frame = document.createElement('div');
+      frame.className = 'slide-frame';
+
+      const live = HTML_SLIDES[slide.id];
+      if (live) {
+        section.classList.add('slide-html');
+        const canvas = document.createElement('div');
+        canvas.className = `slide-canvas ${live.theme} ${live.gx ? 'gx ' : ''}s${slide.id}`;
+        canvas.setAttribute('role', 'group');
+        canvas.setAttribute('aria-label', `Futé 2.0 Slide ${slide.id}`);
+        canvas.innerHTML = live.html;
+        if (LAYOUT[slide.id]) arrange(canvas, LAYOUT[slide.id]);
+        frame.appendChild(canvas);
+      } else {
+        const img = document.createElement('img');
+        img.src = slide.img;
+        img.alt = `Futé 2.0 Slide ${slide.id}`;
+        img.className = 'slide-img';
+        img.loading = index < 2 ? 'eager' : 'lazy';
+        img.dataset.zoom = '';
+        img.tabIndex = 0;
+        img.setAttribute('role', 'button');
+        img.addEventListener('click', () => openLightbox(img));
+        img.addEventListener('keydown', e => { if (e.key === 'Enter') openLightbox(img); });
+        frame.appendChild(img);
+      }
+
+      section.appendChild(frame);
+      app.appendChild(section);
+    });
+
+    // Silky Smooth Intersection Observer
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          document.body.style.backgroundColor = entry.target.dataset.bg;
+          entry.target.classList.add('is-visible');
+        }
+      });
+    }, { 
+      threshold: 0.25,
+      rootMargin: '-50px 0px -50px 0px' 
+    });
+
+    document.querySelectorAll('.slide-section').forEach(sec => observer.observe(sec));
+
+    // Modal Micro-Interactions
+    const overlay = document.getElementById('contactOverlay');
+    const openBtn = document.getElementById('openContactBtn');
+    const closeBtn = document.getElementById('closeContactBtn');
+
+    function openModal() {
+      overlay.classList.add('is-active');
+      overlay.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeModal() {
+      overlay.classList.remove('is-active');
+      overlay.setAttribute('aria-hidden', 'true');
+    }
+
+    openBtn.addEventListener('click', openModal);
+    closeBtn.addEventListener('click', closeModal);
+
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) closeModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+  </script>
+</body>
+</html>
